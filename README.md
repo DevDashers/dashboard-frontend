@@ -10,7 +10,7 @@ In order to get this code working you need to fill in the `.env` file after clon
 
 ## Architecture
 
-This application uses `Bootstrap/Materials UI `, `React`, `JSON`
+This application uses `Bootstrap/Materials UI`, `React`, `JSON`
 
 ## Change Log
 
@@ -24,3 +24,11 @@ This application uses `Bootstrap/Materials UI `, `React`, `JSON`
 - [Donna Ada](https://github.com/donnaada)
 
 ## [Back End Repo](https://github.com/DevDashers/dashboard-backend)
+
+## Domain Modeling
+
+![Domain Modeling](./assets/DomainModeling.png)
+
+## Data Schema
+
+![Data Schema](./assets/DataSchema.png)
