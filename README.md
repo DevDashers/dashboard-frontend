@@ -25,6 +25,10 @@ This application uses `Bootstrap/Materials UI`, `React`, `JSON`
 
 ## [Back End Repo](https://github.com/DevDashers/dashboard-backend)
 
+## WireFrame
+
+![WireFrame](./assets/Wireframe.png)
+
 ## Domain Modeling
 
 ![Domain Modeling](./assets/DomainModeling.png)
