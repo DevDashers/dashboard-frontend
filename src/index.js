@@ -16,3 +16,5 @@ root.render(
     <App />
   </Auth0Provider>
 );
+
+//Updated with Auth0

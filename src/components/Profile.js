@@ -20,3 +20,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+//Auth0 template

@@ -5,6 +5,7 @@ import Footer from './components/footer';
 import LoginButton from './components/Login';
 import LogoutButton from './components/Logout';
 import Profile from './components/Profile';
+import Splash from './components/splash';
 import { withAuth0 } from "@auth0/auth0-react";
 
 class App extends React.Component {
@@ -20,7 +21,10 @@ class App extends React.Component {
                                 <Main />
                             </>
                         :                     
-                    <LoginButton />
+                            <>
+                                <Splash />
+                                <LoginButton />
+                            </>
                 }
                     <Footer />  
             </>

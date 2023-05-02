@@ -12,3 +12,5 @@ const LogoutButton = () => {
 };
 
 export default LogoutButton;
+
+//Auth0 template
