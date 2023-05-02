@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { axios } from ('axios');
+import axios from 'axios';
+import TaskProgress from './todo-progressbar';
 
 const SERVER = process.env.REACT_APP_SERVER;
 
-class ToDo extends React.Component {
+class ToDo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoList: []
+      todoList: [],
+      taskCompleted: 0,
+      totalTasks: 0
     }
   }
 
@@ -17,7 +20,8 @@ class ToDo extends React.Component {
       let todoListData = await axios.get(url);
 
       this.setState({
-        todoList: todoListData.data
+        todoList: todoListData.data,
+        totalTasks: todoListData.data.length
       })
 
       res.status(200).send(todoListData)
@@ -30,16 +34,23 @@ class ToDo extends React.Component {
   componentDidMount() {
     this.getTodoList();
   }
+
+
   render() {
     return (
       <>
-        {this.state.todoList.map(item =>{
-          return(
-            <div key={item._id}>
-              <p>{item.task}</p>
-              <p>{item.dueDate}</p>
-              <p>{item.completed}</p>
-            </div>
+        <TaskProgress totalTasks={this.state.totalTasks} />
+        {this.state.todoList.map(item => {
+          return (
+            <>
+              <details key={item._id}>
+                <summary>
+                  {item.task}
+                </summary>
+                <p>{item.dueDate}</p>
+                <p>{item.completed}</p>
+              </details>
+            </>
           )
         })}
       </>
