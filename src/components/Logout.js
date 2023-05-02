@@ -13,4 +13,4 @@ const LogoutButton = () => {
 
 export default LogoutButton;
 
-//Auth0 template
+//Auth0 template - we can clean this up once we verify logout works on header on live site
