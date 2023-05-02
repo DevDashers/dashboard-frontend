@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TaskProgress from './todo-progressbar';
+import { withAuth0 } from "@auth0/auth0-react";
 
-const SERVER = process.env.REACT_APP_SERVER;
+
+// const SERVER = process.env.REACT_APP_SERVER;
 
 class ToDo extends Component {
   constructor(props) {
@@ -14,27 +16,54 @@ class ToDo extends Component {
     }
   }
 
-  getTodoList = async (req, res, next) => {
-    try {
-      let url = `${SERVER}/todo`;
-      let todoListData = await axios.get(url);
+  // getTodoList = async (req, res, next) => {
+  //   try {
+  //     let url = `${SERVER}/todo`;
+  //     let todoListData = await axios.get(url);
 
+  //     this.setState({
+  //       todoList: todoListData.data,
+  //       totalTasks: todoListData.data.length
+  //     })
+
+  //     res.status(200).send(todoListData)
+
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // componentDidMount() {
+  //   this.getTodoList();
+  // }
+
+
+ getTodoList = async () => {
+    if(this.props.auth0.isAuthenticated){
+      const res = await this.props.auth0.getIdTokenClaims();
+
+      const jwt = res.__raw;
+      
+      console.log('token:', jwt);
+
+      const config = {
+        headers: { "Authorization": `Bearer ${jwt}`},
+        method: 'get',
+        baseURL: process.env.REACT_APP_SERVER,
+        url: '/todo'
+      }      
+      
+      let todoListData = await axios(config);
       this.setState({
         todoList: todoListData.data,
-        totalTasks: todoListData.data.length
+        totalTasks: todoListData.data.length   
       })
-
-      res.status(200).send(todoListData)
-
-    } catch (error) {
-      console.log(error)
     }
   }
 
   componentDidMount() {
     this.getTodoList();
   }
-
 
   render() {
     return (
@@ -58,4 +87,4 @@ class ToDo extends Component {
   }
 }
 
-export default ToDo;
+export default withAuth0(ToDo);
