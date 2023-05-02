@@ -27,7 +27,7 @@ class Main extends React.Component {
             })
 
             // response.status(200).send(memeData.data)
-        } catch(error) {
+        } catch (error) {
             next(error)
 
             this.setState({
@@ -37,13 +37,21 @@ class Main extends React.Component {
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <>
-                <ToDo />
-                <Meme getMeme={this.getMeme} currentMeme={this.state.meme} showMeme={this.state.showMeme} />
-                <Calendar />
-                <Resources />
+                <Container className='flex-grow-1'>
+                    <Row>
+                        <Col>
+                            <ToDo />
+                        </Col>
+                        <Col>
+                            <Meme getMeme={this.getMeme} currentMeme={this.state.meme} showMeme={this.state.showMeme} />
+                            <Calendar />
+                            <Resources />
+                        </Col>
+                    </Row>
+                </Container>
             </>
         )
     }
