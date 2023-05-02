@@ -23,7 +23,7 @@ class Resources extends React.Component {
     getResources = async (request, response, next) => {
         try {
             const resourcesData = await axios.get(`${process.env.REACT_APP_SERVER}/resources`);
-            console.log(resourcesData);
+            // console.log(resourcesData);
 
             this.setState({ resources: resourcesData.data });
 
@@ -78,7 +78,7 @@ class Resources extends React.Component {
             await axios.delete(url);
 
             let updatedResources = this.state.resources.filter(resource => resource._id !== resourceId);
-            console.log(resourceId);
+            // console.log(resourceId);
 
             this.setState({
                 resources: updatedResources
