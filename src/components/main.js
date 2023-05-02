@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ToDo from './todo';
+import ToDo from './to-do';
 import Meme from './meme';
 import Calendar from './calendar';
 import Resources from './resources';
