@@ -6,15 +6,13 @@ import { Container } from 'react-bootstrap';
 
 
 class App extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <Container fluid className='d-flex flex-column vh-100'>
-            <Header />
-            <Main />
-            <Footer />
+                <Header />
+                <Main />
+                <Footer />
             </Container>
-
-            
         )
     }
 }
