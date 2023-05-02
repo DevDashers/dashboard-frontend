@@ -4,6 +4,7 @@ import ToDo from './todo';
 import Meme from './meme';
 import Calendar from './calendar';
 import Resources from './resources';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 class Main extends React.Component {
