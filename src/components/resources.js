@@ -6,6 +6,7 @@ import AccordionItem from 'react-bootstrap/esm/AccordionItem';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
+// import { ListGroup } from 'react-bootstrap';
 
 class Resources extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class Resources extends React.Component {
     getResources = async (request, response, next) => {
         try {
             const resourcesData = await axios.get(`${process.env.REACT_APP_SERVER}/resources`);
-            console.log(resourcesData);
+            // console.log(resourcesData);
 
             this.setState({ resources: resourcesData.data });
 
@@ -41,7 +42,6 @@ class Resources extends React.Component {
             url: e.target.resUrl.value,
         }
         this.postResource(resourceObj);
-        // console.log(`bookObj`);
     }
 
     handleModalShow = () => {
@@ -71,6 +71,45 @@ class Resources extends React.Component {
         }
     }
 
+    deleteResource = async (resourceId) => {
+        try {
+            let url = `${process.env.REACT_APP_SERVER}/resources/${resourceId}`;
+
+            await axios.delete(url);
+
+            let updatedResources = this.state.resources.filter(resource => resource._id !== resourceId);
+            // console.log(resourceId);
+
+            this.setState({
+                resources: updatedResources
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    updateResource = async (resourceToUpdate) => {
+        try {
+            let url = `${process.env.REACT_APP_SERVER}/resources/${resourceToUpdate._id}`
+
+            let updatedResources = await axios.put(url, resourceToUpdate);
+
+            let updatedResArray = this.state.resources.map(existingRes => {
+                return existingRes._id === resourceToUpdate._id
+                ? updatedResources.data
+                : existingRes
+            });
+
+            this.setState({
+                resources: updatedResArray
+            })
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     componentDidMount() {
         this.getResources();
     }
@@ -80,14 +119,24 @@ class Resources extends React.Component {
     render() {
         return (
             <>
-                <Accordion>
+                <Accordion defaultActiveKey="0" flush>
                     <AccordionHeader> <h2>Resources</h2> </AccordionHeader>
                     <AccordionItem eventKey=''>
                         <AccordionBody>
                             {this.state.resources.map((resource, index) => (
-                                <li key={index}>{resource.title}: {resource.description}
-                                    <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
-                                </li>
+                                <ul className="list-group" key={index}>
+                                    <li className="list-group-item d-flex justify-content-between align-items-center"> {resource.title}:
+                                        <button onClick={() => this.deleteResource(resource._id)}className="badge bg-dark rounded-pill">Delete</button>
+                                    </li>
+                                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                                        {resource.description}
+                                    </li>
+                                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                                        <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
+
+                                    </li>
+
+                                </ul>
                             ))}
                             <Button onClick={() => this.handleModalShow()}>Add Resource </Button>
                         </AccordionBody>
