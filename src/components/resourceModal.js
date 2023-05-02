@@ -31,7 +31,7 @@ class ResourceModal extends Component {
         
         <Form.Group className="mb-3" controlId="resUrl">
         <Form.Label>URL</Form.Label>
-          <Form.Control type="name" Placeholder="Resource URL" />
+          <Form.Control type="name" placeholder="Resource URL" />
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
