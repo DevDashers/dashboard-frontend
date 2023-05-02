@@ -1,0 +1,66 @@
+[
+    {
+      "name": "Michael \"Ike\" Steoger",
+      "imageSrc": "https://avatars.githubusercontent.com/u/125151377?v=4",
+      "title": "Future Full-Stack Software Developer",
+      "description": "Tech lover who finally is making the jump into the field & learning everything that fits into my brain!",
+      "social": [
+        {
+          "platform": "github",
+          "link": "https://github.com/IkeSteoger"
+        },
+        {
+          "platform": "linkedin",
+          "link": "https://www.linkedin.com/in/ikesteoger/"
+        }
+      ]
+    },
+    {
+      "name": "Heather Holcomb",
+      "imageSrc": "https://media.licdn.com/dms/image/C4E03AQGVRYUJsqhIrQ/profile-displayphoto-shrink_200_200/0/1517637160057?e=1688601600&v=beta&t=33Mtdu_kJWyyJhbO2trTDp-eUTpKot1rI4QEoNEsASw",
+      "title": "Future Full-Stack Software Developer",
+      "description": "Software Developer seeking out diverse perspectives under the belief that innovation thrives when teams with diverse backgrounds and experiences come together to solve problems!",
+      "social": [
+        {
+          "platform": "github",
+          "link": "https://github.com/holcombheather"
+        },
+        {
+          "platform": "linkedin",
+          "link": "https://www.linkedin.com/in/holcombheather/"
+        }
+      ]
+    },
+    {
+      "name": "Kaeden O'meara",
+      "imageSrc": "https://avatars.githubusercontent.com/u/122385052?v=4",
+      "title": "Future Full-Stack Software Developer",
+      "description": "Student striving for Software Development excellence!",
+      "social": [
+        {
+          "platform": "github",
+          "link": "https://github.com/KaedenOC"
+        },
+        {
+          "platform": "linkedin",
+          "link": "https://www.linkedin.com/in/ikesteoger/"
+        }
+      ]
+    },
+    {
+      "name": "Donna Marie Ada",
+      "imageSrc": "https://avatars.githubusercontent.com/u/125130284?v=4",
+      "title": "Aspiring Full-Stack Software Developer",
+      "description": "Aspiring Dev with a passion for learning to create beautiful and functional websites and web applications.",
+      "social": [
+        {
+          "platform": "github",
+          "link": "https://github.com/donnaada"
+        },
+        {
+          "platform": "linkedin",
+          "link": "https://www.linkedin.com/in/donnaada"
+        }
+      ]
+    }
+  ]
