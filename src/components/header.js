@@ -8,7 +8,7 @@ class Header extends React.Component {
     return (
       <>
         <Navbar collapseOnSelect expand="md">
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="/">DevDashersDashboard</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
