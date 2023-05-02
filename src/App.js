@@ -26,8 +26,8 @@ class App extends React.Component {
                         element={
                             this.props.auth0.isAuthenticated ?
                                 <>
-                                    <Profile />
-                                    <LogoutButton />
+                                    {/* <Profile /> */}
+                                    {/* <LogoutButton /> */}
                                     <Main />
                                 </>
                             :                     
