@@ -6,7 +6,7 @@ import AccordionItem from 'react-bootstrap/esm/AccordionItem';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
-import { ListGroup, ButtonGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ButtonGroup } from 'react-bootstrap';
 import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
