@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Button, Image} from 'react-bootstrap'
+import { withAuth0 } from '@auth0/auth0-react';
 
 class Meme extends React.Component {
 
@@ -12,25 +13,26 @@ class Meme extends React.Component {
         }
     }
 
-    getMeme = async (request, response, next) => {
-        try {
-            let url = `${process.env.REACT_APP_SERVER}/meme`
-            let memeData = await axios.get(url)
-            // console.log(memeData.data)
+    getMeme = async () => {
+        if(this.props.auth0.isAuthenticated) {
+            const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/meme'
+            }
+
+            let memeData = await axios(config);
+
             this.setState({
                 meme: memeData.data,
                 showMeme: true,
             })
-
-            // response.status(200).send(memeData.data)
-        } catch (error) {
-            next(error)
-
-            this.setState({
-                meme: [],
-                showMeme: false,
-            })
-        }
+        } 
     }
 
     render() {
@@ -47,4 +49,4 @@ class Meme extends React.Component {
     }
 }
 
-export default Meme;
+export default withAuth0(Meme);
