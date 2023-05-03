@@ -4,7 +4,7 @@ import { PlusLg } from 'react-bootstrap-icons';
 
 let date = new Date();
 date.setDate(date.getDate() + 1);
-let defaultDue = date.toISOString().slice(0, 10);
+let defaultDue = date.toISOString().slice(0,16);
 
 class AddTask extends Component {
   constructor(props) {
@@ -45,8 +45,8 @@ class AddTask extends Component {
       <Form onSubmit={this.handleSubmit}>
         <Form.Control placeholder="Create New Tasks" aria-label="Task Item" name="taskItem"></Form.Control>
         <InputGroup>
-          <InputGroup.Text onChange={this.handleChange}>Task Due (optional)</InputGroup.Text>
-          <input id="addTask" type="date" value={defaultDue} className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange}/>
+          <InputGroup.Text onChange={this.handleChange}>Due</InputGroup.Text>
+          <input id="addTask" type="datetime-local" defaultValue={defaultDue} className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange}/>
           <button className="btn btn-outline-success" type="submit"><PlusLg /> Add</button>
         </InputGroup>
       </Form>
