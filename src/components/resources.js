@@ -196,7 +196,7 @@ class Resources extends React.Component {
 
                                 </ul>
                             ))}
-                            <Button onClick={() => this.handleModalShow()}>Add Resource </Button>
+                            <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
                         </AccordionBody>
                     </AccordionItem>
 
