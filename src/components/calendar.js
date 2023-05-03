@@ -1,23 +1,24 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Calendar extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            calendar: [],
-            showCalendar: false,
+            calendar: this.props.todoList,
+            showCalendar: true,
         }
     }
 
     getCalendar = async (request, response, next) => {
         try {
-            let url = `${process.env.REACT_APP_SERVER}/calendar`
-            let calendarData = await axios.get(url)
-            console.log(calendarData.data)
+            // let url = `${process.env.REACT_APP_SERVER}/calendar`
+            // let calendarData = await axios.get(url)
+            let calendarData = await this.props.todoList;
+            console.log(calendarData);
             this.setState({
-                calendar: calendarData.data,
+                calendar: calendarData,
                 showCalendar: true,
             })
 
@@ -26,7 +27,7 @@ class Calendar extends React.Component {
             next(error)
 
             this.setState({
-                showCalendar: false,
+                showCalendar: true,
                 calendar: [],
             })
         }
