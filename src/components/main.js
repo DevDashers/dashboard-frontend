@@ -7,7 +7,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 
-
 class Main extends React.Component {
 
     constructor(props) {
@@ -16,50 +15,50 @@ class Main extends React.Component {
             todoList: [],
             taskCompleted: 0,
             totalTasks: 0,
-            isEditing: false,
             taskId: '',
-            readOnly: true
+            showModal: false
+            
         }
     }
-    
+
 
     getTodoList = async () => {
-        if(this.props.auth0.isAuthenticated){
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
-    
+
             const jwt = res.__raw;
-    
+
             const config = {
-                headers: { "Authorization": `Bearer ${jwt}`},
+                headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'get',
                 baseURL: process.env.REACT_APP_SERVER,
                 url: '/todo'
-            }      
-          
+            }
+
             let todoTasks = await axios(config);
 
             this.setState({
                 todoList: todoTasks.data,
-                totalTasks: todoTasks.data.length   
+                totalTasks: todoTasks.data.length
             })
         }
     }
 
 
     addTodoTask = async (task) => {
-        if(this.props.auth0.isAuthenticated){
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
-        
+
             const jwt = res.__raw;
 
             const config = {
-                headers: { "Authorization": `Bearer ${jwt}`},
+                headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'post',
                 baseURL: process.env.REACT_APP_SERVER,
                 url: '/todo',
                 data: task
             }
-            
+
             let createdTodo = await axios(config);
 
             this.setState({
@@ -68,14 +67,57 @@ class Main extends React.Component {
         }
     }
 
-    deleteTodoTask = async (taskToDelete)=>{
-        if(this.props.auth0.isAuthenticated){
+    updateTodoTask = async (taskToUpdate) => {
+        if (this.props.auth0.isAuthenticated) {
+            const res = await this.props.auth0.getIdTokenClaims();
+            const jwt = res.__raw;
+    
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}` },
+                method: 'put',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: `/todo/${taskToUpdate._id}`,
+                data: taskToUpdate,
+            }
+            console.log(taskToUpdate);
+    
+            let updatedTaskList = await axios(config);
+    
+            let updatedListArray = this.state.todoList.map(existingTask => {
+                return existingTask._id === taskToUpdate._id
+                    ? updatedTaskList.data
+                    : existingTask
+            });
+    
+            this.setState({
+                todoList: updatedListArray
+            })
+        }
+    }
+    
+
+
+    handleModalShow = (taskToUpdate) => {
+        this.setState({
+            showModal: true,
+            taskID: taskToUpdate._id
+        })
+    }
+
+    handleModalClose = () => {
+        this.setState({
+            showModal: false
+        })
+    }
+
+    deleteTodoTask = async (taskToDelete) => {
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
 
             const jwt = res.__raw;
 
             const config = {
-                headers: { "Authorization": `Bearer ${jwt}`},
+                headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'delete',
                 baseURL: process.env.REACT_APP_SERVER,
                 url: `/todo/${taskToDelete}`,
@@ -94,16 +136,8 @@ class Main extends React.Component {
         }
     }
 
-    handleEdit = (itemId) => {
-    this.setState({
-        isEditing: true,
-        taskId: itemId,
-        readOnly: false
-    });
-    };
-
     componentDidMount() {
-    this.getTodoList();
+        this.getTodoList();
     }
 
     render() {
@@ -112,18 +146,21 @@ class Main extends React.Component {
                 <Container className='flex-grow-1'>
                     <Row>
                         <Col>
-                            <ToDo 
+                            <ToDo
                                 addTodoTask={this.addTodoTask}
                                 getTodoList={this.getTodoList}
                                 deleteTodoTask={this.deleteTodoTask}
                                 totalTasks={this.state.totalTasks}
                                 todoList={this.state.todoList}
-                                handleEdit={this.handleEdit}
+                                showModal={this.state.showModal}
+                                handleModalClose={this.handleModalClose}
+                                handleModalShow={this.handleModalShow}
+                                updateTodoTask={this.updateTodoTask}
                             />
                         </Col>
                         <Col>
                             <Meme />
-                            <Calendar 
+                            <Calendar
                                 todoList={this.state.todoList}
                             />
                             <Resources />
