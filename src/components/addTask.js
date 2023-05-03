@@ -4,7 +4,7 @@ import { PlusLg } from 'react-bootstrap-icons';
 
 let date = new Date();
 date.setDate(date.getDate() + 1);
-let defaultDue = date.toISOString().slice(0,16);
+// let defaultDue = date.toISOString().slice(0,16);
 
 class AddTask extends Component {
   constructor(props) {
@@ -29,9 +29,14 @@ class AddTask extends Component {
     const formData = this.state.formData;
     const taskItem = e.target.taskItem.value;
     const taskDueDate = e.target.taskDueDate.value;
+   console.log(taskDueDate)
   
     formData["task"] = taskItem;
-    formData["dueDate"] = taskDueDate;
+
+    if (taskDueDate !== ''){
+      formData["dueDate"] = taskDueDate;
+    }
+
     formData["completed"] =false;
   
     console.log(formData);
@@ -46,7 +51,7 @@ class AddTask extends Component {
         <Form.Control placeholder="Create New Tasks" aria-label="Task Item" name="taskItem"></Form.Control>
         <InputGroup>
           <InputGroup.Text onChange={this.handleChange}>Due</InputGroup.Text>
-          <input id="addTask" type="datetime-local" defaultValue={defaultDue} className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange}/>
+          <input id="addTask" type="datetime-local" className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange}/>
           <button className="btn btn-outline-success" type="submit"><PlusLg /> Add</button>
         </InputGroup>
       </Form>
