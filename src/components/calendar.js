@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+import axios from 'axios'; 
+import { ListGroup } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class Calendar extends React.Component {
@@ -46,12 +47,12 @@ class Calendar extends React.Component {
         return(
             <>
             <h3>Calendar Here</h3>
-            <ul>
+            <ListGroup>
             {
                 this.state.calendar.map(taskInfo => 
-                   <li>{taskInfo.task} due on {Date(taskInfo.dueDate)}</li>)
+                   <ListGroup.Item>{taskInfo.task} due on {Date(taskInfo.dueDate)}</ListGroup.Item>)
             }
-            </ul>
+            </ListGroup>
             </>
         )
     }
