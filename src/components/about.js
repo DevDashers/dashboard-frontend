@@ -21,8 +21,7 @@ class Profile extends Component {
 
             {developers.map(dev => {
               return (
-                <Col md={4} className="d-flex align-items-stretch m-5" key={dev.name.split(' ').join('')}>
-                  <div>
+                <Col md={4} className="d-flex flex-column align-items-stretch m-5" key={dev.name.split(' ').join('')}>
                     <Image src={dev.imageSrc} alt="Developer headshot" rounded fluid />
                     <h4>{dev.name}</h4>
                     <span>{dev.title}</span>
@@ -33,7 +32,6 @@ class Profile extends Component {
                       <a className="me-3" href={dev.social[0].link} target="_blank" rel="noreferrer noopenner"><Github /></a>
                       <a className="mx-3" href={dev.social[1].link} target="_blank" rel="noreferrer noopenner"><Linkedin /></a>
                     </div>
-                  </div>
                 </Col>
               )
             })

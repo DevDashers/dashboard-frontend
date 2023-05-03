@@ -16,8 +16,8 @@ class Main extends React.Component {
             taskCompleted: 0,
             totalTasks: 0,
             taskId: '',
-            showModal: false
-            
+            showModal: false,
+            taskToBeUpdated: ''
         }
     }
 
@@ -90,25 +90,24 @@ class Main extends React.Component {
             });
     
             this.setState({
-                todoList: updatedListArray
+                todoList: updatedListArray,
+                taskToBeUpdated: taskToUpdate
             })
         }
     }
-    
 
+    // handleModalShow = (taskToUpdate) => {
+    //     this.setState({
+    //         showModal: true,
+    //         taskID: taskToUpdate._id
+    //     })
+    // }
 
-    handleModalShow = (taskToUpdate) => {
-        this.setState({
-            showModal: true,
-            taskID: taskToUpdate._id
-        })
-    }
-
-    handleModalClose = () => {
-        this.setState({
-            showModal: false
-        })
-    }
+    // handleModalClose = () => {
+    //     this.setState({
+    //         showModal: false
+    //     })
+    // }
 
     deleteTodoTask = async (taskToDelete) => {
         if (this.props.auth0.isAuthenticated) {
@@ -156,6 +155,7 @@ class Main extends React.Component {
                                 handleModalClose={this.handleModalClose}
                                 handleModalShow={this.handleModalShow}
                                 updateTodoTask={this.updateTodoTask}
+                                taskToBeUpdated={this.state.taskToBeUpdated}
                             />
                         </Col>
                         <Col>
