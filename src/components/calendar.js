@@ -1,5 +1,6 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class Calendar extends React.Component {
 
@@ -11,33 +12,37 @@ class Calendar extends React.Component {
         }
     }
 
-    getCalendar = async (request, response, next) => {
-        try {
-            // let url = `${process.env.REACT_APP_SERVER}/calendar`
-            // let calendarData = await axios.get(url)
-            let calendarData = await this.props.todoList;
+    getCalendar = async () => {
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/calendar'
+            }
+            
+            let calendarData = await axios(config)
+            // let calendarData = await this.props.todoList;
+
             console.log(calendarData);
+            
             this.setState({
-                calendar: calendarData,
+                calendar: calendarData.data,
                 showCalendar: true,
-            })
-
-            // response.status(200).send(memeData.data)
-        } catch (error) {
-            next(error)
-
-            this.setState({
-                showCalendar: true,
-                calendar: [],
-            })
+                })
+            }
         }
-    }
+    
+        componentDidMount() {
+            this.getCalendar();
+        }
 
-    componentDidMount() {
-        this.getCalendar();
-      }
 
-      render(){
+      render() {
         return(
             <>
             <h3>Calendar Here</h3>
@@ -50,6 +55,7 @@ class Calendar extends React.Component {
             </>
         )
     }
+
 }
 
-export default Calendar;
+export default withAuth0(Calendar);
