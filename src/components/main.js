@@ -7,7 +7,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 
-const SERVER = process.env.REACT_APP_SERVER;
 
 class Main extends React.Component {
 
@@ -69,23 +68,30 @@ class Main extends React.Component {
         }
     }
 
-    
     deleteTodoTask = async (taskToDelete)=>{
-    let url = `${SERVER}/todo/${taskToDelete}`;
-    try {
-        await axios.delete(url);
-        
-        let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
-        console.log('Task Deleted Succesfully')
-        
-        this.setState({ 
-        todoList: updatedList 
-        });
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
 
-        this.getTodoList();
-    } catch (error) {
-        console.log(error.message)
-    }
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'delete',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: `/todo/${taskToDelete}`,
+            }
+
+            await axios(config);
+
+            let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
+
+            console.log(updatedList);
+            this.setState({
+                todoList: updatedList
+            });
+
+            this.getTodoList();
+        }
     }
 
     handleEdit = (itemId) => {
