@@ -44,7 +44,7 @@ class ToDo extends Component {
 
       const jwt = res.__raw;
       
-      // console.log('token:', jwt);
+      console.log('token:', jwt);
 
       const config = {
         headers: { "Authorization": `Bearer ${jwt}`},
