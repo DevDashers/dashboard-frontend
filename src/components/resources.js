@@ -6,7 +6,7 @@ import AccordionItem from 'react-bootstrap/esm/AccordionItem';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
-import { ButtonGroup } from 'react-bootstrap';
+import { ListGroup, ButtonGroup, ListGroupItem } from 'react-bootstrap';
 import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
@@ -27,13 +27,13 @@ class Resources extends React.Component {
     }
 
     getResources = async () => {
-        if(this.props.auth0.isAuthenticated) {
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
 
             const jwt = res.__raw;
 
             const config = {
-                headers: { "Authorization": `Bearer ${jwt}`},
+                headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'get',
                 baseURL: process.env.REACT_APP_SERVER,
                 url: '/resources'
@@ -41,8 +41,8 @@ class Resources extends React.Component {
 
             let resourcesData = await axios(config);
 
-            this.setState({ 
-                resources: resourcesData.data 
+            this.setState({
+                resources: resourcesData.data
             });
         }
     }
@@ -72,13 +72,13 @@ class Resources extends React.Component {
     }
 
     postResource = async (resourceObj) => {
-        if(this.props.auth0.isAuthenticated){
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
 
             const jwt = res.__raw;
 
             const config = {
-                headers: { "Authorization": `Bearer ${jwt}`},
+                headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'post',
                 baseURL: process.env.REACT_APP_SERVER,
                 url: '/resources',
@@ -94,13 +94,13 @@ class Resources extends React.Component {
     }
 
     deleteResource = async (resourceId) => {
-        if(this.props.auth0.isAuthenticated){
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
 
             const jwt = res.__raw;
 
             const config = {
-                headers: { "Authorization": `Bearer ${jwt}`},
+                headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'delete',
                 baseURL: process.env.REACT_APP_SERVER,
                 url: `/resources/${resourceId}`,
@@ -109,7 +109,7 @@ class Resources extends React.Component {
             await axios(config);
 
             let updatedResources = this.state.resources.filter(item => item._id !== resourceId._id);
-            
+
             console.log(resourceId);
             this.setState({
                 resources: updatedResources
@@ -120,17 +120,17 @@ class Resources extends React.Component {
     }
 
     updateResource = async (resource) => {
-        if(this.props.auth0.isAuthenticated){
+        if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
 
             const jwt = res.__raw;
 
             const config = {
-                    headers: { "Authorization": `Bearer ${jwt}`},
-                    method: 'put',
-                    baseURL: process.env.REACT_APP_SERVER,
-                    url: `/resources/${resource._id}`,
-                    data: resource,
+                headers: { "Authorization": `Bearer ${jwt}` },
+                method: 'put',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: `/resources/${resource._id}`,
+                data: resource,
             }
 
             let updatedResources = await axios(config);
@@ -141,7 +141,7 @@ class Resources extends React.Component {
                     : existingRes
             });
 
-            this.setState({ 
+            this.setState({
                 resources: updatedResArray
             })
         }
@@ -174,29 +174,38 @@ class Resources extends React.Component {
                     <AccordionHeader > <h2>Resources</h2> </AccordionHeader>
                     <AccordionItem eventKey="">
                         <AccordionBody>
-                            {this.state.resources.map((resource, index) => (
-                                <ul className="list-group" key={index}>
-                                    <li className="list-group-item d-flex justify-content-between align-items-center"> {resource.title}
-                                    <ButtonGroup >
-                                        <Button title="Delete" variant="outline-secondary" size="sm" onClick={() => this.deleteResource(resource._id)} >
-                                            <Trash3 />
-                                        </Button>
-                                        <Button variant="outline-secondary" size="sm" onClick={() => this.updateResOpenModal(resource)} title="Edit">
-                                            <PencilSquare />
-                                        </Button>
+                            <ListGroup>
+                                {this.state.resources.map((resource, index) => (
+                                    <div key={index}>
+                                        <ListGroup.Item>
 
-                                    </ButtonGroup>
-                                    </li>
-                                    <li className="list-group-item d-flex justify-content-between align-items-center">
-                                        {resource.description}
-                                    </li>
-                                    <li className="list-group-item d-flex justify-content-between align-items-center">
-                                        <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
-                                    </li>
+                                            <div className="d-flex justify-content-between align-items-center"> {resource.title}
+                                                <ButtonGroup >
+                                                    <Button title="Delete" variant="outline-danger" size="sm" onClick={() => this.deleteResource(resource._id)} >
+                                                        <Trash3 />
+                                                    </Button>
+                                                    <Button variant="outline-secondary" size="sm" onClick={() => this.updateResOpenModal(resource)} title="Edit">
+                                                        <PencilSquare />
+                                                    </Button>
 
-                                </ul>
-                            ))}
-                            <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
+                                                </ButtonGroup>
+                                            </div>
+                                            <hr></hr>
+                                            <div >
+                                                {resource.description ? resource.description : <></>}
+                                            </div>
+                                            <hr></hr>
+                                            <div>
+                                                <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
+                                            </div>
+                                        </ListGroup.Item>
+
+                                    </div>
+                                ))}
+                                <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
+
+
+                            </ListGroup>
                         </AccordionBody>
                     </AccordionItem>
 
@@ -212,9 +221,9 @@ class Resources extends React.Component {
                     show={this.state.showUpdateModal}
                     closeModal={this.updateResCloseModal}
                     resToBeUpdated={this.state.resToBeUpdated}
-                    // resources={this.state.resources}
-                    // id={this.state.resources._id}
-                    // vid={this.state.resources.__v}
+                // resources={this.state.resources}
+                // id={this.state.resources._id}
+                // vid={this.state.resources.__v}
 
                 />
             </>
