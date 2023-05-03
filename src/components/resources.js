@@ -191,10 +191,8 @@ class Resources extends React.Component {
                                                 </ButtonGroup>
                                             </div>
                                             <hr></hr>
-                                            <div >
-                                                {resource.description ? resource.description : <></>}
-                                            </div>
-                                            <hr></hr>
+                                            {resource.description && <div>{resource.description}</div>}
+                                            {resource.description && <hr />}
                                             <div>
                                                 <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
                                             </div>
@@ -202,7 +200,10 @@ class Resources extends React.Component {
 
                                     </div>
                                 ))}
-                                <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
+                                <ListGroup.Item>
+                                    <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
+
+                                </ListGroup.Item>
 
 
                             </ListGroup>
