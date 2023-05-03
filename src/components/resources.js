@@ -169,9 +169,9 @@ class Resources extends React.Component {
     render() {
         return (
             <>
-                <Accordion defaultActiveKey="0" flush>
-                    <AccordionHeader> <h2>Resources</h2> </AccordionHeader>
-                    <AccordionItem eventKey=''>
+                <Accordion defaultActiveKey={['0']} alwaysOpen>
+                    <AccordionHeader > <h2>Resources</h2> </AccordionHeader>
+                    <AccordionItem eventKey="0">
                         <AccordionBody>
                             {this.state.resources.map((resource, index) => (
                                 <ul className="list-group" key={index}>
