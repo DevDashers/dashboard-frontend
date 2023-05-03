@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
 import { Pencil } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
+import { withAuth0 } from '@auth0/auth0-react';
 // import { ListGroup } from 'react-bootstrap';
 
 class Resources extends React.Component {
@@ -24,18 +25,27 @@ class Resources extends React.Component {
         }
     }
 
-    getResources = async (request, response, next) => {
-        try {
-            const resourcesData = await axios.get(`${process.env.REACT_APP_SERVER}/resources`);
-            // console.log(resourcesData);
+    getResources = async () => {
+        if(this.props.auth0.isAuthenticated) {
+            const res = await this.props.auth0.getIdTokenClaims();
 
-            this.setState({ resources: resourcesData.data });
+            const jwt = res.__raw;
 
-            response.status(200).send(resourcesData)
-        } catch (error) {
-            console.error(error);
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/resources'
+            }
+
+            let resourcesData = await axios(config);
+
+            this.setState({ 
+                resources: resourcesData.data 
+            });
         }
     }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -61,43 +71,68 @@ class Resources extends React.Component {
     }
 
     postResource = async (resourceObj) => {
-        try {
-            let url = `${process.env.REACT_APP_SERVER}/resources`;
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
 
-            let postResource = await axios.post(url, resourceObj);
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'post',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/resources',
+                data: resourceObj
+            }
+
+            let postResource = await axios(config);
 
             this.setState({
                 resources: [...this.state.resources, postResource.data]
             })
-
-        } catch (error) {
-            console.log(error.message)
         }
     }
 
     deleteResource = async (resourceId) => {
-        try {
-            let url = `${process.env.REACT_APP_SERVER}/resources/${resourceId}`;
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
 
-            await axios.delete(url);
+            const jwt = res.__raw;
 
-            let updatedResources = this.state.resources.filter(resource => resource._id !== resourceId);
-            // console.log(resourceId);
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'delete',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: `/resources/${resourceId}`,
+            }
 
+            await axios(config);
+
+            let updatedResources = this.state.resources.filter(item => item._id !== resourceId._id);
+            
+            console.log(resourceId);
             this.setState({
                 resources: updatedResources
-            })
+            });
 
-        } catch (error) {
-            console.log(error);
+            this.getResources();
         }
     }
 
     updateResource = async (resource) => {
-        try {
-            let url = `${process.env.REACT_APP_SERVER}/resources/${resource._id}`
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
 
-            let updatedResources = await axios.put(url, resource);
+            const jwt = res.__raw;
+
+            const config = {
+                    headers: { "Authorization": `Bearer ${jwt}`},
+                    method: 'put',
+                    baseURL: process.env.REACT_APP_SERVER,
+                    url: `/resources/${resource._id}`,
+                    data: resource,
+            }
+
+            let updatedResources = await axios(config);
 
             let updatedResArray = this.state.resources.map(existingRes => {
                 return existingRes._id === resource._id
@@ -108,11 +143,9 @@ class Resources extends React.Component {
             this.setState({ 
                 resources: updatedResArray
             })
-
-        } catch (error) {
-            console.log(error.message);
         }
     }
+
 
     updateResOpenModal = (resource) => {
         this.setState({
@@ -185,4 +218,4 @@ class Resources extends React.Component {
     }
 }
 
-export default Resources;
+export default withAuth0(Resources);

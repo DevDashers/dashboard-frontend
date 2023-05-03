@@ -5,8 +5,8 @@ import Calendar from './calendar';
 import Resources from './resources';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import { withAuth0 } from '@auth0/auth0-react';
 
-const SERVER = process.env.REACT_APP_SERVER;
 
 class Main extends React.Component {
 
@@ -22,44 +22,76 @@ class Main extends React.Component {
         }
     }
     
-    getTodoList = async (req, res, next) => {
-        let url = `${SERVER}/todo`;
-        let dataFromAPI = await axios.get(url);
-        let todoTasks = dataFromAPI.data;
 
-
-        this.setState({
-        todoList: todoTasks,
-        totalTasks: todoTasks.length
-        })
-    }
-
-    addTodoTask = async (task, next) => {
-    try {
-        let url = `${SERVER}/todo`;
-        await axios.post(url, task);
-        this.getTodoList();
-    } catch (error) {
-        console.log(error)
-    }
-    }
+    getTodoList = async () => {
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
     
-    deleteTodoTask = async (taskToDelete)=>{
-    let url = `${SERVER}/todo/${taskToDelete}`;
-    try {
-        await axios.delete(url);
-        
-        let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
-        console.log('Task Deleted Succesfully')
-        
-        this.setState({ 
-        todoList: updatedList 
-        });
+            const jwt = res.__raw;
+    
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/todo'
+            }      
+          
+            let todoTasks = await axios(config);
 
-        this.getTodoList();
-    } catch (error) {
-        console.log(error.message)
+            this.setState({
+                todoList: todoTasks.data,
+                totalTasks: todoTasks.data.length   
+            })
+        }
     }
+
+
+    addTodoTask = async (task) => {
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
+        
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'post',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/todo',
+                data: task
+            }
+            
+            let createdTodo = await axios(config);
+
+            this.setState({
+                todoList: [...this.state.todoList, createdTodo.data]
+            })
+        }
+    }
+
+    deleteTodoTask = async (taskToDelete)=>{
+        if(this.props.auth0.isAuthenticated){
+            const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}`},
+                method: 'delete',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: `/todo/${taskToDelete}`,
+            }
+
+            await axios(config);
+
+            let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
+
+            console.log(updatedList);
+            this.setState({
+                todoList: updatedList
+            });
+
+            this.getTodoList();
+        }
     }
 
     handleEdit = (itemId) => {
@@ -103,4 +135,4 @@ class Main extends React.Component {
     }
 }
 
-export default Main;
+export default withAuth0(Main);
