@@ -21,11 +21,6 @@ class UpdateTodoForm extends React.Component {
       __v: this.props.vId
     }
 
-    this.setState({
-      task: '',
-      dueDate: '',
-    });
-
     this.props.updateTodoTask(taskToUpdate)
     this.props.handleModalClose();
   }
@@ -54,7 +49,7 @@ class UpdateTodoForm extends React.Component {
         <Form onSubmit={this.handleTaskSubmit}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Update {this.props.title}
+               <img src="https://img.icons8.com/?size=512&id=114415&format=png" width={60} alt='edit list icon'/> Updating Task
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -68,11 +63,12 @@ class UpdateTodoForm extends React.Component {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" type="submit">
+            <Button variant='outline-secondary' onClick={this.props.handleModalClose}>
+              Close
+            </Button>
+            <Button variant="outline-primary" type="submit">
               Submit
             </Button>
-            <Button onClick={() => console.log(this.props.itemID)}>Close</Button>
-            {/* <Button onClick={this.props.handleModalClose}>Close</Button> */}
           </Modal.Footer>
         </Form>
       </Modal>

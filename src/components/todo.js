@@ -51,24 +51,26 @@ class ToDo extends Component {
     const progress = totalCount > 0 ? Math.round(completedCount / totalCount * 100) : 0;
     return (
       <>
+      <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121196&format=png' alt='todo list icon' width={75}/>ToDo List</h3>
+      <hr/>
         <AddTask handleAddTask={this.props.addTodoTask} />
         <TaskProgress progress={progress} completedCount={completedCount} totalCount={totalCount} />
-        <ListGroup>
+        <ListGroup className='border border-2 border-bottom-0 rounded-1'>
           {this.props.todoList.map(item => {
             const dueDate = new Date(item.dueDate);
             const formattedDate = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             const formattedTime = dueDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
             return (
               <div key={item._id}>
-                <ListGroup.Item>
+                <ListGroup.Item className='p-2 border-0 border-bottom'>
                 { item.dueDate ? <p className='text-start text-secondary small mb-2 '>Due {formattedDate} at {formattedTime}</p> : <></>  }
 
-                  <div className='d-flex align-item-center justify-content-between'>
-                    <div>
-                      <input className="form-check-input me-1" type="checkbox" checked={item.completed} onChange={(e) => this.handleCheckBoxClick(e, item._id, item.__v)} />
-                      <label className='form-check-label'>{item.task}</label>
+                  <div className='d-flex align-items-center justify-content-between'>
+                    <div className='d-flex flex-row align-items-start'>
+                      <input className="flex-shrink-0 form-check-input me-1" type="checkbox" checked={item.completed} onChange={(e) => this.handleCheckBoxClick(e, item._id, item.__v)} />
+                      <label className='form-check-label text-wrap'>{item.task}</label>
                     </div>
-                    <ButtonGroup>
+                    <ButtonGroup className='flex-shrink-0 align-items-start'>
                       <Button variant="outline-secondary" size="sm" onClick={() => this.handleUpdateModalShow(item._id)}>
                         <PencilSquare />
                       </Button>

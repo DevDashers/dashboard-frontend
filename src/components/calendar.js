@@ -43,7 +43,8 @@ class Calendar extends React.Component {
 
 
       render() {
-        let timeFormat = this.props.todoList.map(item => {
+        let todoList = this.props.todoList.sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+        let timeFormat = todoList.map(item => {
             const dueDate = new Date(item.dueDate);
             const formattedDate = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             const formattedTime = dueDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
@@ -54,7 +55,7 @@ class Calendar extends React.Component {
             <h3>Calendar Here</h3>
             <ListGroup>
             {
-                this.props.todoList.filter(task => task.completed !== true && (task.dueDate !== '' || null)).map((taskInfo, i) => {
+                todoList.filter(task => task.completed !== true && (task.dueDate !== '' || null)).map((taskInfo, i) => {
                     if(taskInfo.dueDate){
                        return <ListGroup.Item>
                             {taskInfo.task} due on {timeFormat[i]}
