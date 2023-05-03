@@ -49,8 +49,19 @@ class ToDo extends Component {
     try {
       await axios.delete(url);
       
+
+     // console.log('token:', jwt);
+
+    // const config = {
+    //   headers: { "Authorization": `Bearer ${jwt}`},
+    //   method: 'get',
+    //   baseURL: process.env.REACT_APP_SERVER,
+    //    url: '/todo'
+    //  }      
+
       let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
       console.log('Task Deleted Succesfully')
+
       
       this.setState({ 
         todoList: updatedList 
