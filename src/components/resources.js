@@ -6,6 +6,8 @@ import AccordionItem from 'react-bootstrap/esm/AccordionItem';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
+import { Pencil } from 'react-bootstrap-icons';
+import UpdateResModal from './updateResModal';
 // import { ListGroup } from 'react-bootstrap';
 
 class Resources extends React.Component {
@@ -16,7 +18,9 @@ class Resources extends React.Component {
             title: '',
             description: '',
             url: '',
-            showModal: false
+            resToBeUpdated: null,
+            showModal: false,
+            showUpdateModal: false
         }
     }
 
@@ -89,25 +93,38 @@ class Resources extends React.Component {
         }
     }
 
-    updateResource = async (resourceToUpdate) => {
+    updateResource = async (resource) => {
         try {
-            let url = `${process.env.REACT_APP_SERVER}/resources/${resourceToUpdate._id}`
+            let url = `${process.env.REACT_APP_SERVER}/resources/${resource._id}`
 
-            let updatedResources = await axios.put(url, resourceToUpdate);
+            let updatedResources = await axios.put(url, resource);
 
             let updatedResArray = this.state.resources.map(existingRes => {
-                return existingRes._id === resourceToUpdate._id
-                ? updatedResources.data
-                : existingRes
+                return existingRes._id === resource._id
+                    ? updatedResources.data
+                    : existingRes
             });
 
-            this.setState({
+            this.setState({ 
                 resources: updatedResArray
             })
 
         } catch (error) {
             console.log(error.message);
         }
+    }
+
+    updateResOpenModal = (resource) => {
+        this.setState({
+            showUpdateModal: true,
+            resToBeUpdated: resource
+        })
+    }
+
+    updateResCloseModal = () => {
+        this.setState({
+            showUpdateModal: false
+        })
     }
 
     componentDidMount() {
@@ -126,13 +143,17 @@ class Resources extends React.Component {
                             {this.state.resources.map((resource, index) => (
                                 <ul className="list-group" key={index}>
                                     <li className="list-group-item d-flex justify-content-between align-items-center"> {resource.title}:
-                                        <button onClick={() => this.deleteResource(resource._id)}className="badge bg-dark rounded-pill">Delete</button>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center">
                                         {resource.description}
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center">
                                         <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
+                                    </li>
+                                    <li className="list-group-item d-flex align-items-center">
+                                        <button title="Delete"  onClick={() => this.deleteResource(resource._id)} className="badge bg-dark rounded-pill">Delete</button>
+                                        {/* <button className="badge bg-dark rounded-pill">Update</button> */}
+                                        <Pencil onClick={() => this.updateResOpenModal(resource)} className="bi bi-pencil" title="Edit"></Pencil>
 
                                     </li>
 
@@ -148,6 +169,16 @@ class Resources extends React.Component {
                     showModal={this.state.showModal}
                     handleModalClose={() => this.handleModalClose()}
                     handleSubmit={this.handleSubmit}
+                />
+                <UpdateResModal
+                    updateResource={this.updateResource}
+                    show={this.state.showUpdateModal}
+                    closeModal={this.updateResCloseModal}
+                    resToBeUpdated={this.state.resToBeUpdated}
+                    // resources={this.state.resources}
+                    // id={this.state.resources._id}
+                    // vid={this.state.resources.__v}
+
                 />
             </>
         )
