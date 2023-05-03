@@ -10,6 +10,7 @@ import { ListGroup, ButtonGroup } from 'react-bootstrap';
 import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
+import resImg from '../resources.png';
 // import { ListGroup } from 'react-bootstrap';
 
 class Resources extends React.Component {
@@ -171,7 +172,10 @@ class Resources extends React.Component {
         return (
             <>
                 <Accordion defaultActiveKey="0" >
-                    <AccordionHeader > <h2>Resources</h2> </AccordionHeader>
+                    <AccordionHeader >
+                        <img src={resImg} alt="resource book" height={65} />
+                        <h2>Resources</h2>
+                    </AccordionHeader>
                     <AccordionItem eventKey="">
                         <AccordionBody>
                             <ListGroup>
