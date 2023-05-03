@@ -42,15 +42,16 @@ class AddTask extends Component {
     console.log(formData);
     this.props.handleAddTask(formData);
     e.target.reset();
+    this.setState({ formData:{} });
   }
 
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form className='border border-2 p-2 rounded-1' onSubmit={this.handleSubmit}>
         <Form.Control placeholder="Create New Tasks" aria-label="Task Item" name="taskItem"></Form.Control>
         <InputGroup>
-          <InputGroup.Text onChange={this.handleChange}>Due</InputGroup.Text>
+          <InputGroup.Text onChange={this.handleChange}>Due <span className="small fst-italic"> (optional)</span></InputGroup.Text>
           <input id="addTask" type="datetime-local" className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange}/>
           <button className="btn btn-outline-success" type="submit"><PlusLg /> Add</button>
         </InputGroup>

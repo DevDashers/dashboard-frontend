@@ -4,37 +4,22 @@ import { Modal, Form, Button } from 'react-bootstrap';
 class UpdateTodoForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       task: this.props.task,
       dueDate: this.props.dueDate,
-      completed: this.props.completed,
       id: this.props.itemID,
       vId: this.props.vId,
     }
   }
   handleTaskSubmit = (event) => {
     event.preventDefault();
-    console.log('>>> task', this.props.task)
-    console.log('>>> e.target', event.target)
-    console.log('>>> e.target', event.target.task)
-    console.log('>>> e.target', event.target.dueDate)
-    console.log('>>> e.target', event.target.completed.checked)
 
     let taskToUpdate = {
       task: this.state.task,
       dueDate: this.state.dueDate,
-      completed: this.state.completed,
       _id: this.props.itemID,
       __v: this.props.vId
     }
-
-    this.setState({
-      task: '',
-      dueDate: '',
-      completed: false,
-    });
-    console.log('>>>', taskToUpdate)
 
     this.props.updateTodoTask(taskToUpdate)
     this.props.handleModalClose();
@@ -50,11 +35,7 @@ class UpdateTodoForm extends React.Component {
       dueDate: event.target.value,
     })
   )
-  setCompleted = (event) => (
-    this.setState({
-      completed: event.target.value,
-    })
-  )
+
 
   render() {
     return (
@@ -68,7 +49,7 @@ class UpdateTodoForm extends React.Component {
         <Form onSubmit={this.handleTaskSubmit}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Update {this.props.title}
+               <img src="https://img.icons8.com/?size=512&id=114415&format=png" width={60} alt='edit list icon'/> Updating Task
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -80,17 +61,14 @@ class UpdateTodoForm extends React.Component {
               <Form.Label>Due Date</Form.Label>
               <Form.Control type="datetime-local" onChange={this.setDate} defaultValue={this.props.dueDate} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="completed">
-              <Form.Label>Completed</Form.Label>
-              <Form.Check type="checkbox" checked={this.state.completed} onChange={this.setCompleted} />
-            </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" type="submit">
+            <Button variant='outline-secondary' onClick={this.props.handleModalClose}>
+              Close
+            </Button>
+            <Button variant="outline-primary" type="submit">
               Submit
             </Button>
-            <Button onClick={() => console.log(this.props.itemID)}>Close</Button>
-            {/* <Button onClick={this.props.handleModalClose}>Close</Button> */}
           </Modal.Footer>
         </Form>
       </Modal>

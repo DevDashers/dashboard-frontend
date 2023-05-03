@@ -17,7 +17,6 @@ class ToDo extends Component {
   }
 
   handleUpdateModalShow = (id) => {
-    console.log('handlemodalshow>>>',id)
     this.setState({
       showUpdateModal: true,
       taskToBeUpdated: id,
@@ -31,17 +30,11 @@ class ToDo extends Component {
   }
 
   handleCheckBoxClick = (e, id, vId) => {
-    console.log('>>> task', this.props.task)
-    // console.log('>>> e.target', e.target.completed.checked)
-
-
     let taskToUpdate = {
       completed: e.target.checked,
       _id: id,
       __v: vId
     }
-
-    console.log('>>>', taskToUpdate)
 
     this.props.updateTodoTask(taskToUpdate)
   }
@@ -56,26 +49,28 @@ class ToDo extends Component {
     const completedCount = this.props.todoList.filter(item => item.completed).length;
     const totalCount = this.props.todoList.length;
     const progress = totalCount > 0 ? Math.round(completedCount / totalCount * 100) : 0;
-    console.log('>>> progress', progress)
     return (
       <>
+      <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121196&format=png' alt='todo list icon' width={75}/>ToDo List</h3>
+      <hr/>
         <AddTask handleAddTask={this.props.addTodoTask} />
         <TaskProgress progress={progress} completedCount={completedCount} totalCount={totalCount} />
-        <ListGroup>
+        <ListGroup className='border border-2 border-bottom-0 rounded-1'>
           {this.props.todoList.map(item => {
             const dueDate = new Date(item.dueDate);
             const formattedDate = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             const formattedTime = dueDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
             return (
               <div key={item._id}>
-                <ListGroup.Item>
-                  <div className='d-flex align-item-center justify-content-between'>
-                    <div>
-                      <input className="form-check-input me-1" type="checkbox" checked={item.completed} onChange={(e) => this.handleCheckBoxClick(e, item._id, item.__v)} />
-                      <label className='form-check-label'>{item.task}</label>
+                <ListGroup.Item className='p-2 border-0 border-bottom'>
+                { item.dueDate ? <p className='text-start text-secondary small mb-2 '>Due {formattedDate} at {formattedTime}</p> : <></>  }
+
+                  <div className='d-flex align-items-center justify-content-between'>
+                    <div className='d-flex flex-row align-items-start'>
+                      <input className="flex-shrink-0 form-check-input me-1" type="checkbox" checked={item.completed} onChange={(e) => this.handleCheckBoxClick(e, item._id, item.__v)} />
+                      <label className='form-check-label text-wrap'>{item.task}</label>
                     </div>
-                    <ButtonGroup>
-                      <Button onClick={() => console.log(item._id)} />
+                    <ButtonGroup className='flex-shrink-0 align-items-start'>
                       <Button variant="outline-secondary" size="sm" onClick={() => this.handleUpdateModalShow(item._id)}>
                         <PencilSquare />
                       </Button>
@@ -84,7 +79,6 @@ class ToDo extends Component {
                       </Button>
                     </ButtonGroup>
                   </div>
-                  { item.dueDate ? <p className='text-start text-secondary fs'>Due {formattedDate} at {formattedTime}</p> : <></>  }
                 </ListGroup.Item>
                 <UpdateTodoForm
                   todoList={item}
@@ -92,7 +86,7 @@ class ToDo extends Component {
                   itemID={item._id}
                   task={item.task}
                   completed={item.completed}
-                  dueDate={dueDate}
+                  dueDate={item.dueDate}
                   showModal={this.state.taskToBeUpdated === item._id && this.state.showUpdateModal}
                   updateTodoTask={this.props.updateTodoTask}
                   taskToBeUpdated={this.props.taskToBeUpdated}
