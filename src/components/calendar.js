@@ -2,6 +2,7 @@ import React from 'react';
 // import axios from 'axios'; 
 import { ListGroup } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
+import reminder from '../reminder.png'
 
 class Calendar extends React.Component {
 
@@ -51,21 +52,21 @@ class Calendar extends React.Component {
             return `${formattedDate} at ${formattedTime}`
         });
         return(
-            <>
-            <h3>Calendar Here</h3>
-            <ListGroup>
-            {
-                todoList.filter(task => task.completed !== true && (task.dueDate !== '' || null)).map((taskInfo, i) => {
-                    if(taskInfo.dueDate){
-                       return <ListGroup.Item>
-                            {taskInfo.task} due on {timeFormat[i]}
-                        </ListGroup.Item>
-                   }
-                    return <></>    
-                }) 
-            }
-            </ListGroup>
-            </>
+            <div className='border border-2 p-2'>
+                <h3 className='text-center'><img src={reminder} alt='' height={100}></img>Upcoming To-Dos!</h3>
+                <ListGroup className='list-group-flush text-center list-group-numbered border border-2'>
+                {
+                    todoList.filter(task => task.completed !== true && (task.dueDate !== '' || null)).map((taskInfo, i) => {
+                        if(taskInfo.dueDate){
+                        return <ListGroup.Item>
+                                {taskInfo.task} due on {timeFormat[i]}
+                            </ListGroup.Item>
+                    }
+                        return <></>    
+                    }) 
+                }
+                </ListGroup>
+            </div>
         )
     }
 }
