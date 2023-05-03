@@ -12,13 +12,15 @@ class ToDo extends Component {
     this.state = {
       showUpdateModal: false,
       completed: this.props.todoList.completed,
+      taskToBeUpdated: ''
     }
   }
 
   handleUpdateModalShow = (id) => {
-    console.log(id)
+    console.log('handlemodalshow>>>',id)
     this.setState({
-      showUpdateModal: true
+      showUpdateModal: true,
+      taskToBeUpdated: id,
     })
   }
 
@@ -28,26 +30,25 @@ class ToDo extends Component {
     })
   }
 
-  handleCheckBoxClick = (e, id, vId) =>{
+  handleCheckBoxClick = (e, id, vId) => {
     console.log('>>> task', this.props.task)
     // console.log('>>> e.target', e.target.completed.checked)
 
 
     let taskToUpdate = {
-        completed: e.target.checked,
-        _id: id,
-        __v: vId
-      }
+      completed: e.target.checked,
+      _id: id,
+      __v: vId
+    }
 
     console.log('>>>', taskToUpdate)
 
     this.props.updateTodoTask(taskToUpdate)
-}
+  }
 
-
-setCompleted = (event) => (
+  setCompleted = (event) => (
     this.setState({
-        completed: event.target.checked,
+      completed: event.target.checked,
     })
   )
 
@@ -70,7 +71,7 @@ setCompleted = (event) => (
                 <ListGroup.Item>
                   <div className='d-flex align-item-center justify-content-between'>
                     <div>
-                    <input className="form-check-input me-1" type="checkbox" checked={item.completed} onChange={(e) => this.handleCheckBoxClick(e, item._id, item.__v)}/>
+                      <input className="form-check-input me-1" type="checkbox" checked={item.completed} onChange={(e) => this.handleCheckBoxClick(e, item._id, item.__v)} />
                       <label className='form-check-label'>{item.task}</label>
                     </div>
                     <ButtonGroup>
@@ -83,7 +84,7 @@ setCompleted = (event) => (
                       </Button>
                     </ButtonGroup>
                   </div>
-                  <p className='text-start text-secondary fs'>Due {formattedDate} at {formattedTime}</p>
+                  { item.dueDate ? <p className='text-start text-secondary fs'>Due {formattedDate} at {formattedTime}</p> : <></>  }
                 </ListGroup.Item>
                 <UpdateTodoForm
                   todoList={item}
@@ -92,8 +93,9 @@ setCompleted = (event) => (
                   task={item.task}
                   completed={item.completed}
                   dueDate={dueDate}
-                  showModal={this.state.showUpdateModal}
+                  showModal={this.state.taskToBeUpdated === item._id && this.state.showUpdateModal}
                   updateTodoTask={this.props.updateTodoTask}
+                  taskToBeUpdated={this.props.taskToBeUpdated}
                   handleModalClose={this.handleUpdateModalClose}
                 />
               </div>
