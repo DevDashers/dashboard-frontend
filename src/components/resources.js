@@ -6,7 +6,8 @@ import AccordionItem from 'react-bootstrap/esm/AccordionItem';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
-import { Pencil } from 'react-bootstrap-icons';
+import { ButtonGroup } from 'react-bootstrap';
+import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
 // import { ListGroup } from 'react-bootstrap';
@@ -169,13 +170,22 @@ class Resources extends React.Component {
     render() {
         return (
             <>
-                <Accordion defaultActiveKey={['0']} alwaysOpen>
+                <Accordion defaultActiveKey="0" >
                     <AccordionHeader > <h2>Resources</h2> </AccordionHeader>
-                    <AccordionItem eventKey="0">
+                    <AccordionItem eventKey="">
                         <AccordionBody>
                             {this.state.resources.map((resource, index) => (
                                 <ul className="list-group" key={index}>
-                                    <li className="list-group-item d-flex justify-content-between align-items-center"> {resource.title}:
+                                    <li className="list-group-item d-flex justify-content-between align-items-center"> {resource.title}
+                                    <ButtonGroup >
+                                        <Button title="Delete" variant="outline-secondary" size="sm" onClick={() => this.deleteResource(resource._id)} >
+                                            <Trash3 />
+                                        </Button>
+                                        <Button variant="outline-secondary" size="sm" onClick={() => this.updateResOpenModal(resource)} title="Edit">
+                                            <PencilSquare />
+                                        </Button>
+
+                                    </ButtonGroup>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center">
                                         {resource.description}
@@ -183,16 +193,10 @@ class Resources extends React.Component {
                                     <li className="list-group-item d-flex justify-content-between align-items-center">
                                         <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
                                     </li>
-                                    <li className="list-group-item d-flex align-items-center">
-                                        <button title="Delete"  onClick={() => this.deleteResource(resource._id)} className="badge bg-dark rounded-pill">Delete</button>
-                                        {/* <button className="badge bg-dark rounded-pill">Update</button> */}
-                                        <Pencil onClick={() => this.updateResOpenModal(resource)} className="bi bi-pencil" title="Edit"></Pencil>
-
-                                    </li>
 
                                 </ul>
                             ))}
-                            <Button onClick={() => this.handleModalShow()}>Add Resource </Button>
+                            <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
                         </AccordionBody>
                     </AccordionItem>
 
