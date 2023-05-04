@@ -6,7 +6,6 @@ import '../index.css';
 
 
 class Splash extends React.Component {
- 
 
 
     render(){
@@ -19,8 +18,7 @@ class Splash extends React.Component {
                             <h1 id="h1splash">Dev Dashers</h1>                
                             <LoginButton />
                         </div>
-
-            </div> 
+                </div> 
             </container>
 
 
