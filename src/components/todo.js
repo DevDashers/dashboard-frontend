@@ -53,8 +53,8 @@ class ToDo extends Component {
       <>
       <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121196&format=png' alt='todo list icon' width={75}/>ToDo List</h3>
       <hr/>
-        <AddTask handleAddTask={this.props.addTodoTask} />
         <TaskProgress progress={progress} completedCount={completedCount} totalCount={totalCount} />
+        <AddTask handleAddTask={this.props.addTodoTask} />
         <ListGroup className='border border-2 border-bottom-0 rounded-1'>
           {this.props.todoList.map(item => {
             const dueDate = new Date(item.dueDate);
