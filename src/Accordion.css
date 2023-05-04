@@ -1,0 +1,24 @@
+#AccBox {
+  box-shadow: 5px 5px #888888;
+  border-radius: 5px 5px;
+}
+
+
+.accordion .accordion-header button {
+  background-color: transparent;
+  box-shadow: none;
+  color: black;
+}
+
+.listgroup .item{
+  color: black;
+}
+
+.accordion .accordion-header button::after {
+  transition: all 1s ease;
+}
+
+.accDesc {
+  font-style: italic;
+}
+
