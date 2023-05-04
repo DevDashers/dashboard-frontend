@@ -12,40 +12,37 @@ import './index.css';
 
 
 class App extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <>
-            <Container 
-            fluid className='d-flex flex-column vh-100 bg-light' 
-            >
-                <Router>
-
-                    <Routes>
-                    
-                        <Route
-                        exact path="/"
-                        element={
-                            this.props.auth0.isAuthenticated ?
-                                <>
-                                    <Header />
-                                    <Main />
-                                </>
-                            :                     
-                                <>
-                                    <Splash />
-                                </>
-                        }
-                        >
-                        </Route>
-                        <Route
-                        exact path="/about"
-                        element={<About />}
-                        >
-                        </Route>
-                    </Routes>
-                    <Footer />
-                </Router>
-            </Container>
+                <Container fluid className='d-flex flex-column vh-100'>
+                    <Router>
+                        <Header />
+                        <Routes>
+                            <Route
+                                exact path="/"
+                                element={
+                                    this.props.auth0.isAuthenticated ?
+                                        <>
+                                            <Main />
+                                        </>
+                                        :
+                                        <>
+                                            <Splash />
+                                        </>
+                                }
+                            >
+                            </Route>
+                            <Route
+                                exact path="/about"
+                                element={<About />}
+                            >
+                            </Route>
+                        </Routes>
+                        
+                        <Footer />
+                    </Router>
+                </Container>
             </>
         )
     }

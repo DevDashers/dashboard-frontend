@@ -11,7 +11,6 @@ import { ListGroup, ButtonGroup, ListGroupItem } from 'react-bootstrap';
 import { Link45deg, PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
-import resImg from '../resources.png';
 
 class Resources extends React.Component {
   constructor(props) {
@@ -170,13 +169,15 @@ class Resources extends React.Component {
 
   render() {
     return (
-      <div className='border border-2 p-2 bg-white my-2'>
-        <Accordion className="p-1" defaultActiveKey="0" >
+      <div className='p-2 bg-dark my-2' style={{border: '4px solid #84d9ec'}}>
+        <Accordion variant="dark" className="p-1" defaultActiveKey={['0']} alwaysOpen>
           <AccordionHeader >
-            <img src={resImg} alt="resource book" height={65} />
-            <h2>Resources</h2>
+            <div className="d-flex flex-row align-items-center">
+              <img src='https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif' alt="resource book" height={100} />
+              <h2 className='pt-4 ps-2'>Resources</h2>
+            </div>
           </AccordionHeader>
-          <AccordionItem eventKey="">
+          <AccordionItem eventKey="0">
             <AccordionBody >
               <ListGroup id="AccBox">
                 {this.state.resources.map((resource, index) => (
@@ -185,10 +186,10 @@ class Resources extends React.Component {
                       <div className="d-flex justify-content-between align-items-center fw-bold">
                         <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.title} <Link45deg /></a>
                         <ButtonGroup >
-                          <Button variant="outline-secondary" size="sm" onClick={() => this.updateResOpenModal(resource)} title="Edit">
+                          <Button variant="secondary" size="sm" onClick={() => this.updateResOpenModal(resource)} title="Edit">
                             <PencilSquare />
                           </Button>
-                          <Button title="Delete" variant="outline-danger" size="sm" onClick={() => this.deleteResource(resource._id)} >
+                          <Button title="Delete" variant="danger" size="sm" onClick={() => this.deleteResource(resource._id)} >
                             <Trash3 />
                           </Button>
                         </ButtonGroup>

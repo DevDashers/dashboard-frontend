@@ -2,6 +2,9 @@ import { Component } from "react";
 import { Image, Row, Col } from "react-bootstrap";
 import { Github, Linkedin } from "react-bootstrap-icons";
 import developers from '../team.json'
+// import logo from  '../assets/logo1.png';
+import  pixelComputer from  '../assets/logo.png';
+
 
 class Profile extends Component {
 
@@ -12,10 +15,11 @@ class Profile extends Component {
       <>
         <div className="container my-5">
 
-          <div>
-            <h2>Meet the Team</h2>
-            <hr />
+          <div className="d-flex flex-row align-items-center">
+            <img src={pixelComputer} alt="pixel computer"  />
+            <h2 className="ps-3 pt-2">Meet the Team</h2>
           </div>
+            <hr />
 
           <Row className="justify-content-md-center g-5">
 

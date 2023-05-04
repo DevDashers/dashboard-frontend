@@ -56,7 +56,7 @@ class AddTask extends Component {
           </InputGroup.Text>
           
           <input id="addTask" type="datetime-local" className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange} />
-          <button className="btn btn-outline-success" type="submit"><PlusLg /> Add</button>
+          <button className="btn btn-success" type="submit"><PlusLg /> Add</button>
         </InputGroup>
       </Form>
     );

@@ -46,12 +46,12 @@ class Weather extends React.Component {
     render() {
         let weather = this.state.weatherData;
         return (
-                <Card className='col px-2 py-1 border-0'>
+                <Card className='col px-2 py-1 border-0 bg-dark'>
                     <Card.Body className='p-0 mb-2'>
                         <div className='d-flex flex-column flex-md-row align-items-center justify-content-around'>
                                 <Image src={weather.icons} alt='weather icon' />
                             <div className='ms-3'>
-                                <span className='d-block'>{weather.city} </span>
+                                <span className='d-block' style={{color:'#84d9ec'}}>{weather.city} </span>
                                 <span className='d-block'>{weather.description}</span>
                                 <span className='d-block'> {weather.tempF}{'\u00b0'} F</span>
                                 <span className='d-block' style={{ fontSize: '.7rem' }}>Feels like {weather.feelsLikeF}{'\u00b0'} F</span>
