@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+#AccBox {
+  box-shadow: 5px 5px #888888bb;
+}
+
+.accordion{
+  border-width: 0x;
+}
+
+.accordion .accordion-header button {
+  background-color: transparent;
+  box-shadow: none;
+  /* color: black; */
+}
+
+.accordion .accordion-header h2{
+  color: #d1d1d1;
+}
+
+.accordion .accordion-item{
+  border: 2px solid #888888bb;
+  border-radius: 5px 5px;
+}
+
+
+.accordion .accordion-header button::after {
+  transition: all 1s ease;
+}
+
+.accDesc {
+  font-style: italic;
+}
+
+.accordion-body {
+  /* background-color: rgba(128, 128, 128, 0.575); */
+  background-color: rgb(89, 89, 89);
+  padding: 0;
+  border-width: 0;
+}
