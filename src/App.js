@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './components/header';
 import Main from './components/main';
 import Footer from './components/footer';
-// import LoginButton from './components/Login';
 import Splash from './components/splash';
 import About from './components/about'
 import { withAuth0 } from "@auth0/auth0-react";
@@ -34,7 +33,6 @@ class App extends React.Component {
                             :                     
                                 <>
                                     <Splash />
-                                    {/* <LoginButton /> */}
                                 </>
                         }
                         >
