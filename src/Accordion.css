@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Yanone+Kaffeesatz:wght@200;400&display=swap');
-
 
 #AccBox {
   box-shadow: 5px 5px #88888836;
@@ -24,9 +22,4 @@
 
 .accDesc {
   font-style: italic;
-}
-
-h2 {
-  font-family: 'Cinzel', serif;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
