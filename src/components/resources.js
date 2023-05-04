@@ -12,7 +12,6 @@ import { Link45deg, PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
 import resImg from '../resources.png';
-// import { ListGroup } from 'react-bootstrap';
 
 class Resources extends React.Component {
   constructor(props) {
@@ -196,9 +195,6 @@ class Resources extends React.Component {
                       </div>
                       {resource.description && <div className="accDesc">{resource.description}</div>}
                       {resource.description && <hr />}
-                      {/* <div>
-                        <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
-                      </div> */}
                     </ListGroup.Item>
                   </div>
                 ))}
@@ -223,9 +219,6 @@ class Resources extends React.Component {
           show={this.state.showUpdateModal}
           closeModal={this.updateResCloseModal}
           resToBeUpdated={this.state.resToBeUpdated}
-        // resources={this.state.resources}
-        // id={this.state.resources._id}
-        // vid={this.state.resources.__v}
 
         />
       </div>
