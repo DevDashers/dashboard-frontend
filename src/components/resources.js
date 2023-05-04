@@ -181,7 +181,7 @@ class Resources extends React.Component {
               <ListGroup id="AccBox">
                 {this.state.resources.map((resource, index) => (
                   <div key={index} className='mb-2'>
-                    <ListGroup.Item>
+                    <ListGroupItem>
                       <div className="d-flex justify-content-between align-items-center fw-bold">
                         <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.title} <Link45deg /></a>
                         <ButtonGroup >
@@ -195,13 +195,13 @@ class Resources extends React.Component {
                       </div>
                       {resource.description && <div className="accDesc">{resource.description}</div>}
                       {resource.description && <hr />}
-                    </ListGroup.Item>
+                    </ListGroupItem>
                   </div>
                 ))}
-                <ListGroup.Item>
+                <ListGroupItem>
                 <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
 
-                </ListGroup.Item>
+                </ListGroupItem>
 
               </ListGroup>
             </AccordionBody>
