@@ -45,19 +45,11 @@ class ToDo extends Component {
   )
 
   render() {
-    // const completedCount = this.props.todoList.filter(item => item.completed).length;
-    // const totalCount = this.props.todoList.length;
-    // const progress = totalCount > 0 ? Math.round(completedCount / totalCount * 100) : 0;
     return (
-      <div className='border border-2 p-2 bg-white'>
-        <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121196&format=png' alt='todo list icon' width={75} />ToDo List</h3>
+      <div className="p-2 bg-dark" style={{border: '4px solid #fd01ba'}}>
+        <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121624&format=png' alt='todo list icon' width={65}/> ToDo List</h3>
         <hr />
-        {/* <Col md className='border border-3 border-secondary fs-6 fw-bold p-4 rounded-3 text-center align-self-stretch my-2'>
-          <div>
-            <p className='mb-2'>{progress}% of Tasks Completed</p>
-            <ProgressBar animated striped now={progress} />
-          </div>
-        </Col> */}
+
         <AddTask handleAddTask={this.props.addTodoTask} />
         <ListGroup className='border border-2 border-bottom-0 rounded-1'>
           {this.props.todoList.map(item => {
@@ -67,7 +59,7 @@ class ToDo extends Component {
             return (
               <div key={item._id}>
                 <ListGroup.Item className='p-2 border-0 border-bottom'>
-                  {item.dueDate ? <p className='text-start text-secondary small mb-2 '>Due {formattedDate} at {formattedTime}</p> : <></>}
+                  {item.dueDate ? <p className='text-start small mb-2 '>Due {formattedDate} at {formattedTime}</p> : <></>}
 
                   <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex flex-row align-items-start'>
@@ -75,10 +67,10 @@ class ToDo extends Component {
                       <label className='form-check-label text-wrap'>{item.task}</label>
                     </div>
                     <ButtonGroup className='flex-shrink-0 align-items-start'>
-                      <Button variant="outline-secondary" size="sm" title="Edit" onClick={() => this.handleUpdateModalShow(item._id)}>
+                      <Button variant="secondary" size="sm" title="Edit" onClick={() => this.handleUpdateModalShow(item._id)}>
                         <PencilSquare />
                       </Button>
-                      <Button variant="outline-danger" size="sm" title="Delete" onClick={() => this.props.deleteTodoTask(item._id)}>
+                      <Button variant="danger" size="sm" title="Delete" onClick={() => this.props.deleteTodoTask(item._id)}>
                         <Trash3 />
                       </Button>
                     </ButtonGroup>

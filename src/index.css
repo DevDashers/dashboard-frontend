@@ -1,11 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
   margin: 0;
-  padding: 0;
+  color: #d1d1d1;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.90) 100%), url(https://a-static.besthdwallpaper.com/sunset-synthwave-retrowave-wallpaper-1680x1050-81392_5.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 70% center;
+  background-repeat: no-repeat; 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+}
+
+a{
+  color: #84d9ec;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 code {
@@ -13,9 +27,17 @@ code {
     monospace;
 }
 
-Footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.list-group-item{
+  background-color: rgb(89, 89, 89);
+  color: #d1d1d1;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Press Start 2P', cursive;
+}
+
+#headerTitle {
+  font-family: 'Press Start 2P', cursive;
+  color: #91f963;
 }
