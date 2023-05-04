@@ -14,7 +14,7 @@ class App extends React.Component {
     render(){
         return(
             <>
-            <Container fluid className='d-flex flex-column vh-100'>
+            <Container fluid className='d-flex flex-column vh-100 bg-light'>
                 <Router>
                     <Header />
                     <Routes>

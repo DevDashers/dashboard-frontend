@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TaskProgress from './todo-progressbar';
 import { ListGroup, Button, ButtonGroup } from 'react-bootstrap';
 import AddTask from './addTask';
 import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
@@ -46,14 +45,19 @@ class ToDo extends Component {
   )
 
   render() {
-    const completedCount = this.props.todoList.filter(item => item.completed).length;
-    const totalCount = this.props.todoList.length;
-    const progress = totalCount > 0 ? Math.round(completedCount / totalCount * 100) : 0;
+    // const completedCount = this.props.todoList.filter(item => item.completed).length;
+    // const totalCount = this.props.todoList.length;
+    // const progress = totalCount > 0 ? Math.round(completedCount / totalCount * 100) : 0;
     return (
-      <>
-      <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121196&format=png' alt='todo list icon' width={75}/>ToDo List</h3>
-      <hr/>
-        <TaskProgress progress={progress} completedCount={completedCount} totalCount={totalCount} />
+      <div className='border border-2 p-2 bg-white'>
+        <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121196&format=png' alt='todo list icon' width={75} />ToDo List</h3>
+        <hr />
+        {/* <Col md className='border border-3 border-secondary fs-6 fw-bold p-4 rounded-3 text-center align-self-stretch my-2'>
+          <div>
+            <p className='mb-2'>{progress}% of Tasks Completed</p>
+            <ProgressBar animated striped now={progress} />
+          </div>
+        </Col> */}
         <AddTask handleAddTask={this.props.addTodoTask} />
         <ListGroup className='border border-2 border-bottom-0 rounded-1'>
           {this.props.todoList.map(item => {
@@ -63,7 +67,7 @@ class ToDo extends Component {
             return (
               <div key={item._id}>
                 <ListGroup.Item className='p-2 border-0 border-bottom'>
-                { item.dueDate ? <p className='text-start text-secondary small mb-2 '>Due {formattedDate} at {formattedTime}</p> : <></>  }
+                  {item.dueDate ? <p className='text-start text-secondary small mb-2 '>Due {formattedDate} at {formattedTime}</p> : <></>}
 
                   <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex flex-row align-items-start'>
@@ -96,7 +100,7 @@ class ToDo extends Component {
             )
           })}
         </ListGroup>
-      </>
+      </div>
     )
   }
 }
