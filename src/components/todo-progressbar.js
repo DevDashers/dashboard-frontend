@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Col, ProgressBar, Row, Image } from 'react-bootstrap';
-import { Clipboard } from 'react-bootstrap-icons';
 
 class TaskProgress extends Component {
   render() {
