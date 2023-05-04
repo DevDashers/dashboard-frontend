@@ -7,7 +7,7 @@ import AccordionItem from 'react-bootstrap/esm/AccordionItem';
 import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import Button from 'react-bootstrap/Button';
 import ResourceModal from './resourceModal';
-import { ListGroup, ButtonGroup } from 'react-bootstrap';
+import { ListGroup, ButtonGroup, ListGroupItem } from 'react-bootstrap';
 import { Link45deg, PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateResModal from './updateResModal';
 import { withAuth0 } from '@auth0/auth0-react';
@@ -184,7 +184,7 @@ class Resources extends React.Component {
                   <div key={index} className='mb-2'>
                     <ListGroup.Item>
                       <div className="d-flex justify-content-between align-items-center fw-bold">
-                        <a href={resource.url}>{resource.title} <Link45deg /></a>
+                        <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.title} <Link45deg /></a>
                         <ButtonGroup >
                           <Button variant="outline-secondary" size="sm" onClick={() => this.updateResOpenModal(resource)} title="Edit">
                             <PencilSquare />
@@ -202,8 +202,11 @@ class Resources extends React.Component {
                     </ListGroup.Item>
                   </div>
                 ))}
-
+                <ListGroup.Item>
                 <Button variant="secondary" onClick={() => this.handleModalShow()}>Add Resource </Button>
+
+                </ListGroup.Item>
+
               </ListGroup>
             </AccordionBody>
           </AccordionItem>
