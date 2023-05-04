@@ -9,10 +9,14 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 
-
-
 class App extends React.Component {
     render() {
+        const { isAuthenticated, isLoading } = this.props.auth0;
+
+        if (isLoading) {
+            return <h1 className="text-center">Loading...</h1>;
+        }
+
         return (
             <>
                 <Container fluid className='d-flex flex-column vh-100'>
@@ -22,7 +26,7 @@ class App extends React.Component {
                             <Route
                                 exact path="/"
                                 element={
-                                    this.props.auth0.isAuthenticated ?
+                                    isAuthenticated ?
                                         <>
                                             <Main />
                                         </>
