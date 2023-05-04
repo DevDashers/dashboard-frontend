@@ -42,13 +42,14 @@ class Meme extends React.Component {
 
     render() {
         return (
-            <div className='d-flex flex-column justify-content-center border p-2 border-2 text-center'>
+            <div className='d-flex flex-column justify-content-center border p-2 border-2 text-center bg-white'>
                 {this.state.showMeme
-                    ? <><Image className='mx-auto border border-2 p-2' src={this.state.meme[2]} alt="" width={250} fluid/>
+                    ? <>
                     <div className='p-2 mx-2'>
-                    <p className='' ><b>{this.state.meme[0]}</b></p>
-                    <p>created by {this.state.meme[1]}</p> 
-                    <p>via Reddit.com/r/Aww</p>
+                    <p className='fw-bold small'>{this.state.meme[0]}</p>
+                    <Image className='mx-auto border border-2 p-2' src={this.state.meme[2]} alt="" width={250} fluid/>
+                    <p className='small'>created by {this.state.meme[1]} <br/> via Reddit.com/r/Aww</p> 
+                    <p></p>
                     </div></>
                     : <></>
                 }

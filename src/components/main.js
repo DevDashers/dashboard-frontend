@@ -6,6 +6,7 @@ import Resources from './resources';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
+import DashboardCards from './dashboard-cards';
 
 class Main extends React.Component {
 
@@ -71,7 +72,7 @@ class Main extends React.Component {
         if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
             const jwt = res.__raw;
-    
+
             const config = {
                 headers: { "Authorization": `Bearer ${jwt}` },
                 method: 'put',
@@ -80,34 +81,21 @@ class Main extends React.Component {
                 data: taskToUpdate,
             }
             console.log(taskToUpdate);
-    
+
             let updatedTaskList = await axios(config);
-    
+
             let updatedListArray = this.state.todoList.map(existingTask => {
                 return existingTask._id === taskToUpdate._id
                     ? updatedTaskList.data
                     : existingTask
             });
-    
+
             this.setState({
                 todoList: updatedListArray,
                 taskToBeUpdated: taskToUpdate
             })
         }
     }
-
-    // handleModalShow = (taskToUpdate) => {
-    //     this.setState({
-    //         showModal: true,
-    //         taskID: taskToUpdate._id
-    //     })
-    // }
-
-    // handleModalClose = () => {
-    //     this.setState({
-    //         showModal: false
-    //     })
-    // }
 
     deleteTodoTask = async (taskToDelete) => {
         if (this.props.auth0.isAuthenticated) {
@@ -140,11 +128,20 @@ class Main extends React.Component {
     }
 
     render() {
+        const completedCount = this.state.todoList.filter(item => item.completed).length;
+        const totalCount = this.state.todoList.length;
+        const progress = totalCount > 0 ? Math.round(completedCount / totalCount * 100) : 0;
         return (
             <>
-                <Container className='flex-grow-1'>
+                <Container className='flex-grow-1 my-3' fluid>
+
                     <Row>
-                        <Col>
+                        <Col xs lg="2">
+                            <DashboardCards progress={progress} completedCount={completedCount} totalCount={totalCount} />
+                            <Meme />
+                        </Col>
+                       
+                        <Col xs lg="6">
                             <ToDo
                                 addTodoTask={this.addTodoTask}
                                 getTodoList={this.getTodoList}
@@ -158,8 +155,7 @@ class Main extends React.Component {
                                 taskToBeUpdated={this.state.taskToBeUpdated}
                             />
                         </Col>
-                        <Col>
-                            <Meme />
+                        <Col xs lg="4">
                             <Calendar
                                 todoList={this.state.todoList}
                             />

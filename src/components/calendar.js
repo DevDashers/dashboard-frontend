@@ -26,7 +26,7 @@ class Calendar extends React.Component {
     //             baseURL: process.env.REACT_APP_SERVER,
     //             url: '/calendar'
     //         }
-            
+
     //         let calendarData = await axios(config)
     //         // let calendarData = await this.props.todoList;
     //         // console.log(calendarData);
@@ -37,34 +37,34 @@ class Calendar extends React.Component {
     //         })
     //     }
     // }
-    
+
     // componentDidMount() {
     //         this.getCalendar();
     // }
 
 
-      render() {
-        let todoList = this.props.todoList.sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+    render() {
+        let todoList = this.props.todoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
         let timeFormat = todoList.map(item => {
             const dueDate = new Date(item.dueDate);
             const formattedDate = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             const formattedTime = dueDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
             return `${formattedDate} at ${formattedTime}`
         });
-        return(
-            <div className='border border-2 p-2'>
+        return (
+            <div className='border border-2 p-2 bg-white'>
                 <h3 className='text-center'><img src={reminder} alt='' height={100}></img>Upcoming To-Dos!</h3>
-                <ListGroup className='list-group-flush text-center list-group-numbered border border-2'>
-                {
-                    todoList.filter(task => task.completed !== true && (task.dueDate !== '' || null)).map((taskInfo, i) => {
-                        if(taskInfo.dueDate){
-                        return <ListGroup.Item>
-                                {taskInfo.task} due on {timeFormat[i]}
-                            </ListGroup.Item>
+                <ListGroup className='list-group-flush text-start list-group-numbered border border-2'>
+                    {
+                        todoList.filter(task => task.completed !== true && (task.dueDate !== '' || null)).map((taskInfo, i) => {
+                            if (taskInfo.dueDate) {
+                                return <ListGroup.Item>
+                                    {taskInfo.task} due on <span className='fw-semibold'>{timeFormat[i]}</span>
+                                </ListGroup.Item>
+                            }
+                            return <></>
+                        })
                     }
-                        return <></>    
-                    }) 
-                }
                 </ListGroup>
             </div>
         )

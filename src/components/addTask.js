@@ -29,30 +29,33 @@ class AddTask extends Component {
     const formData = this.state.formData;
     const taskItem = e.target.taskItem.value;
     const taskDueDate = e.target.taskDueDate.value;
-   console.log(taskDueDate)
-  
+    console.log(taskDueDate)
+
     formData["task"] = taskItem;
 
-    if (taskDueDate !== ''){
+    if (taskDueDate !== '') {
       formData["dueDate"] = taskDueDate;
     }
 
-    formData["completed"] =false;
-  
+    formData["completed"] = false;
+
     console.log(formData);
     this.props.handleAddTask(formData);
     e.target.reset();
-    this.setState({ formData:{} });
+    this.setState({ formData: {} });
   }
 
 
   render() {
     return (
-      <Form className='border border-2 p-2 rounded-1' onSubmit={this.handleSubmit}>
+      <Form className='border border-2 p-2 my-2 rounded-1' onSubmit={this.handleSubmit}>
         <Form.Control placeholder="Create New Tasks" aria-label="Task Item" name="taskItem"></Form.Control>
         <InputGroup>
-          <InputGroup.Text onChange={this.handleChange}>Due <span className="small fst-italic"> (optional)</span></InputGroup.Text>
-          <input id="addTask" type="datetime-local" className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange}/>
+          <InputGroup.Text onChange={this.handleChange}>
+            Due <span className="small fst-italic"> (optional)</span>
+          </InputGroup.Text>
+          
+          <input id="addTask" type="datetime-local" className="form-control" placeholder="Task Due Date" aria-label="Task Due Date" name="taskDueDate" onChange={this.handleChange} />
           <button className="btn btn-outline-success" type="submit"><PlusLg /> Add</button>
         </InputGroup>
       </Form>
