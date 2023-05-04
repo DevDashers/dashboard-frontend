@@ -1,3 +1,4 @@
+import '../Accordion.css'
 import React from 'react';
 import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
@@ -171,19 +172,19 @@ class Resources extends React.Component {
     render() {
         return (
             <>
-                <Accordion defaultActiveKey="0" >
+                <Accordion className="mt-5 p-1" defaultActiveKey="0" >
                     <AccordionHeader >
                         <img src={resImg} alt="resource book" height={65} />
                         <h2>Resources</h2>
                     </AccordionHeader>
                     <AccordionItem eventKey="">
-                        <AccordionBody>
-                            <ListGroup>
+                        <AccordionBody >
+                            <ListGroup id="AccBox">
                                 {this.state.resources.map((resource, index) => (
                                     <div key={index}>
                                         <ListGroup.Item>
 
-                                            <div className="d-flex justify-content-between align-items-center"> {resource.title}
+                                            <div className="d-flex justify-content-between align-items-center fw-bold"> {resource.title}
                                                 <ButtonGroup >
                                                     <Button title="Delete" variant="outline-danger" size="sm" onClick={() => this.deleteResource(resource._id)} >
                                                         <Trash3 />
@@ -195,7 +196,7 @@ class Resources extends React.Component {
                                                 </ButtonGroup>
                                             </div>
                                             <hr></hr>
-                                            {resource.description && <div>{resource.description}</div>}
+                                            {resource.description && <div className="accDesc">{resource.description}</div>}
                                             {resource.description && <hr />}
                                             <div>
                                                 <a href={resource.url} target="_blank" rel="noopener noreferrer">{resource.url}</a>
