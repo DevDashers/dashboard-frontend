@@ -75,10 +75,10 @@ class ToDo extends Component {
                       <label className='form-check-label text-wrap'>{item.task}</label>
                     </div>
                     <ButtonGroup className='flex-shrink-0 align-items-start'>
-                      <Button variant="outline-secondary" size="sm" onClick={() => this.handleUpdateModalShow(item._id)}>
+                      <Button variant="outline-secondary" size="sm" title="Edit" onClick={() => this.handleUpdateModalShow(item._id)}>
                         <PencilSquare />
                       </Button>
-                      <Button variant="outline-danger" size="sm" onClick={() => this.props.deleteTodoTask(item._id)}>
+                      <Button variant="outline-danger" size="sm" title="Delete" onClick={() => this.props.deleteTodoTask(item._id)}>
                         <Trash3 />
                       </Button>
                     </ButtonGroup>
