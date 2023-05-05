@@ -45,15 +45,15 @@ class Meme extends React.Component {
             <div className='d-flex flex-column justify-content-center p-2 text-center bg-dark' style={{border: '4px solid #fdb92b'}}>
                 {this.state.showMeme
                     ? <>
-                    <div className='p-2 mx-2' >
+                    <div className='px-2 mx-2' >
                     <p className='fw-bold small'>{this.state.meme[0]}</p>
                     <Image className='mx-auto p-2' style={{border: '2px solid #fdb92b'}} src={this.state.meme[2]} alt="" width={250} fluid/>
-                    <p className='small'>created by {this.state.meme[1]} <br/> via Reddit.com/r/Aww</p> 
+                    <span className='d-block small'>created by {this.state.meme[1]} <br/> via Reddit.com/r/Aww</span> 
                     <p></p>
                     </div></>
                     : <></>
                 }
-                <Button className='mx-auto p-2' variant='outline-warning' onClick={() => this.getMeme()}>
+                <Button className='mx-auto p-2' variant='warning' onClick={() => this.getMeme()}>
                 <ArrowClockwise />
                 </Button>
             </div>

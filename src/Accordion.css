@@ -10,6 +10,7 @@
 
 .accordion .accordion-header button {
   background-color: transparent;
+  color: #d1d1d1;
   box-shadow: none;
   /* color: black; */
 }
@@ -26,6 +27,7 @@
 
 .accordion .accordion-header button::after {
   transition: all 1s ease;
+  color: #d1d1d1;
 }
 
 .accDesc {
@@ -37,4 +39,9 @@
   background-color: rgb(89, 89, 89);
   padding: 0;
   border-width: 0;
+}
+
+.accordion .accordion-header .accordion-button{
+  padding-top: 0;
+  color: #888888bb;
 }

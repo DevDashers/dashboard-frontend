@@ -80,7 +80,6 @@ class Main extends React.Component {
                 url: `/todo/${taskToUpdate._id}`,
                 data: taskToUpdate,
             }
-            console.log(taskToUpdate);
 
             let updatedTaskList = await axios(config);
 
@@ -114,7 +113,6 @@ class Main extends React.Component {
 
             let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
 
-            console.log(updatedList);
             this.setState({
                 todoList: updatedList
             });
@@ -136,13 +134,13 @@ class Main extends React.Component {
                 <Container className='flex-grow-1 my-3' fluid>
 
                     <Row>
-                        <Col xs lg="2">
+                        <Col md className='order-last order-lg-first d-none d-lg-block' lg="3" xl="3">
                             <DashboardCards progress={progress} completedCount={completedCount} totalCount={totalCount} />
                             <Meme />
                         </Col>
-                       
-                        <Col xs lg="6">
-                            <ToDo
+
+                        <Col md="6" lg="5" xl="5">
+                            <ToDo  
                                 addTodoTask={this.addTodoTask}
                                 getTodoList={this.getTodoList}
                                 deleteTodoTask={this.deleteTodoTask}
@@ -153,13 +151,20 @@ class Main extends React.Component {
                                 handleModalShow={this.handleModalShow}
                                 updateTodoTask={this.updateTodoTask}
                                 taskToBeUpdated={this.state.taskToBeUpdated}
+                                progress={progress}
+                                completedCount={completedCount}
+                                totalCount={totalCount}
                             />
                         </Col>
-                        <Col xs lg="4">
+                        <Col md lg="4" xl="4">
                             <Calendar
                                 todoList={this.state.todoList}
                             />
                             <Resources />
+                            <div className='order-last order-lg-first d-block d-lg-none' >
+                                <DashboardCards progress={progress} completedCount={completedCount} totalCount={totalCount} />
+                                <Meme />
+                            </div>
                         </Col>
                     </Row>
                 </Container>

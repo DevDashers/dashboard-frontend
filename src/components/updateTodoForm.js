@@ -46,7 +46,7 @@ class UpdateTodoForm extends React.Component {
         show={this.props.showModal}
         onHide={this.props.handleModalClose}
       >
-        <Form onSubmit={this.handleTaskSubmit}>
+        <Form className='text-bg-secondary' onSubmit={this.handleTaskSubmit}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
                <img src="https://img.icons8.com/?size=512&id=114415&format=png" width={60} alt='edit list icon'/> Updating Task
@@ -63,10 +63,10 @@ class UpdateTodoForm extends React.Component {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='outline-secondary' onClick={this.props.handleModalClose}>
+            <Button variant='dark' onClick={this.props.handleModalClose}>
               Close
             </Button>
-            <Button variant="outline-primary" type="submit">
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Modal.Footer>

@@ -13,7 +13,7 @@ class ResourceModal extends Component {
       show={this.props.showModal}
       onHide={this.props.handleModalClose}
     >
-      <Form onSubmit={this.props.handleSubmit}>
+      <Form className='text-bg-secondary' onSubmit={this.props.handleSubmit}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Add A Resource
