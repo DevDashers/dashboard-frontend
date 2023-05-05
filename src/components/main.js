@@ -80,7 +80,6 @@ class Main extends React.Component {
                 url: `/todo/${taskToUpdate._id}`,
                 data: taskToUpdate,
             }
-            console.log(taskToUpdate);
 
             let updatedTaskList = await axios(config);
 
@@ -114,7 +113,6 @@ class Main extends React.Component {
 
             let updatedList = this.state.todoList.filter(item => item._id !== taskToDelete._id);
 
-            console.log(updatedList);
             this.setState({
                 todoList: updatedList
             });

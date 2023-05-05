@@ -110,7 +110,6 @@ class Resources extends React.Component {
 
       let updatedResources = this.state.resources.filter(item => item._id !== resourceId._id);
 
-      console.log(resourceId);
       this.setState({
         resources: updatedResources
       });

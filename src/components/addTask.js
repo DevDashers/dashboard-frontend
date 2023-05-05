@@ -18,10 +18,8 @@ class AddTask extends Component {
     const field = e.target.taskItem;
     const value = e.target.value;
     const formData = this.state.formData;
-    console.log(field, value, formData);
     formData[field] = value;
     this.setState({ formData });
-    console.log(formData[field], value);
   }
 
   handleSubmit = (e) => {
@@ -29,7 +27,6 @@ class AddTask extends Component {
     const formData = this.state.formData;
     const taskItem = e.target.taskItem.value;
     const taskDueDate = e.target.taskDueDate.value;
-    console.log(taskDueDate)
 
     formData["task"] = taskItem;
 
@@ -39,7 +36,6 @@ class AddTask extends Component {
 
     formData["completed"] = false;
 
-    console.log(formData);
     this.props.handleAddTask(formData);
     e.target.reset();
     this.setState({ formData: {} });

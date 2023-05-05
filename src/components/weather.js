@@ -59,7 +59,6 @@ class Weather extends React.Component {
                 lat: cityData.data[0].lat,
                 lon: cityData.data[0].lon,
             }
-            console.log('cityObj>>>', cityObj);
 
 
             this.setState({
@@ -100,7 +99,6 @@ class Weather extends React.Component {
             }
 
             let createdCity = await axios(config);
-            console.log('createdcity', createdCity)
 
             this.setState({
                 storedCityData: [...this.state.storedCityData, createdCity.data]
@@ -109,7 +107,6 @@ class Weather extends React.Component {
     }
 
     updateCity = async (cityToUpdate) => {
-        console.log('thisisid>>>', cityToUpdate._id)
         if (this.props.auth0.isAuthenticated) {
             const res = await this.props.auth0.getIdTokenClaims();
 
@@ -124,7 +121,6 @@ class Weather extends React.Component {
             }
 
             let updatedCityData = await axios(config);
-            console.log('updatedCityData', updatedCityData)
 
             let updatedCityArr = this.state.storedCityData.map(existingRes => {
                 return existingRes._id === cityToUpdate._id
@@ -202,7 +198,6 @@ class Weather extends React.Component {
             }
 
             let weatherDataFromApi = await axios(weatherConfig);
-            console.log(weatherDataFromApi)
 
             let cityWeather = weatherDataFromApi.data[0].map(a => {
                 return [a.iconPath, a.city, a.description, a.temp, a.feelsLike, a.date, a.icon]
@@ -227,7 +222,6 @@ class Weather extends React.Component {
 
 
     render() {
-        console.log()
         let weather = this.state.weatherInfo
         const lastUpdated = new Date(this.state.weatherlastUpdated);
         const formattedDate = lastUpdated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });

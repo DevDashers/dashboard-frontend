@@ -33,7 +33,6 @@ class UpdateCityModal extends Component {
         this.props.updateCity(cityToBeUpdate);
         this.props.closeModal();
 
-        console.log(cityToBeUpdate)
     }
 
     setCity = (e) => (
