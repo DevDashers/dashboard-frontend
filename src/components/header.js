@@ -9,9 +9,9 @@ class Header extends React.Component {
   render() {
     return (
       <>
-        <Navbar collapseOnSelect expand="md">
+        <Navbar variant='dark' collapseOnSelect expand="md">
           <Navbar.Brand href="/"><span id="headerTitle">DevDashersDashboard</span></Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Toggle className='text-secondary' aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Link to="/about">About the Team</Link>

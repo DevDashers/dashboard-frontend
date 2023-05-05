@@ -110,7 +110,6 @@ class Resources extends React.Component {
 
       let updatedResources = this.state.resources.filter(item => item._id !== resourceId._id);
 
-      console.log(resourceId);
       this.setState({
         resources: updatedResources
       });
@@ -170,14 +169,14 @@ class Resources extends React.Component {
   render() {
     return (
       <div className='p-2 bg-dark my-2' style={{border: '4px solid #84d9ec'}}>
-        <Accordion variant="dark" className="p-1" defaultActiveKey={['0']} alwaysOpen>
+        <Accordion variant="dark" className="accordion-header p-1" defaultActiveKey={['0']} >
           <AccordionHeader >
             <div className="d-flex flex-row align-items-center">
               <img src='https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif' alt="resource book" height={100} />
-              <h2 className='pt-4 ps-2'>Resources</h2>
+              <h2 className='pt-4 ps-2 text-break'>Resources</h2>
             </div>
           </AccordionHeader>
-          <AccordionItem eventKey="0">
+          <AccordionItem eventKey="">
             <AccordionBody >
               <ListGroup id="AccBox">
                 {this.state.resources.map((resource, index) => (

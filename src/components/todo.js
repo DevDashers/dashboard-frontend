@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, Button, ButtonGroup } from 'react-bootstrap';
+import { ProgressBar, ListGroup, Button, ButtonGroup } from 'react-bootstrap';
 import AddTask from './addTask';
 import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import UpdateTodoForm from './updateTodoForm';
@@ -45,12 +45,24 @@ class ToDo extends Component {
   )
 
   render() {
+    
     return (
+      <>
+      <div className='bg-dark mb-2 d-block d-lg-none' style={{ border: '4px solid #91f963' }}>
+      <div className='fs-6 fw-bold text-center p-4 '>
+        <h3 className='fs-5'>Task Progress Bar</h3>
+        <p className='mb-2'>{this.props.progress}% of Tasks Completed ({this.props.completedCount}/{this.props.totalCount})</p>
+        <ProgressBar variant='success' animated striped now={this.props.progress} />
+      </div>
+
+    </div>
       <div className="p-2 bg-dark" style={{border: '4px solid #fd01ba'}}>
         <h3 className='mb-0'><img src='https://img.icons8.com/?size=512&id=121624&format=png' alt='todo list icon' width={65}/> ToDo List</h3>
         <hr />
 
         <AddTask handleAddTask={this.props.addTodoTask} />
+        {this.props.todoList.length === 0 ? <> <hr/><p className='fs-5 text-center py-3 my-2'>No To-Do Items Found!</p> </>: <></>}
+
         <ListGroup className='border border-2 border-bottom-0 rounded-1'>
           {this.props.todoList.map(item => {
             const dueDate = new Date(item.dueDate);
@@ -93,6 +105,7 @@ class ToDo extends Component {
           })}
         </ListGroup>
       </div>
+      </>
     )
   }
 }
