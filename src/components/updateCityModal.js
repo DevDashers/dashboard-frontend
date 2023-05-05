@@ -27,9 +27,6 @@ class UpdateCityModal extends Component {
             _id: this.props.id,
         }
 
-        // let cityToBeUpdate = {
-        //     city: this.state.city,
-        // }
         this.props.updateCity(cityToBeUpdate);
         this.props.closeModal();
 

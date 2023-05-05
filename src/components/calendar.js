@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios'; 
 import { ListGroup } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
 import reminder from '../reminder.png'

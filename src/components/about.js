@@ -2,15 +2,12 @@ import { Component } from "react";
 import { Image, Row, Col } from "react-bootstrap";
 import { Github, Linkedin } from "react-bootstrap-icons";
 import developers from '../team.json'
-// import logo from  '../assets/logo1.png';
 import  pixelComputer from  '../assets/logo.png';
 
 
 class Profile extends Component {
 
   render() {
-    /* TODO: render information about the developers */
-    // return <p>Profile page coming soon</p>
     return (
       <>
         <div className="container my-5">

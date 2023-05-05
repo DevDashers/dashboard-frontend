@@ -4,7 +4,6 @@ import { PlusLg } from 'react-bootstrap-icons';
 
 let date = new Date();
 date.setDate(date.getDate() + 1);
-// let defaultDue = date.toISOString().slice(0,16);
 
 class AddTask extends Component {
   constructor(props) {
