@@ -67,7 +67,6 @@ class Weather extends React.Component {
                 storedCityData: cityObj,
             });
 
-            // this.getWeatherData(cityData.data[0].lat, cityData.data[0].lon);
             this.addCityData(cityObj);
 
         } catch (error) {
@@ -271,8 +270,6 @@ class Weather extends React.Component {
         )
     }
 }
-// .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-// .toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
 
 
 export default withAuth0(Weather);
