@@ -29,7 +29,7 @@ class UpdateResModal extends Component {
         show={this.props.show}
         onHide={this.props.closeModal}
       >
-        <Form onSubmit={this.handleUpdateSubmit}>
+        <Form className='bg-secondary' onSubmit={this.handleUpdateSubmit}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
               Edit Resource
@@ -51,10 +51,10 @@ class UpdateResModal extends Component {
           </Modal.Body>
 
           <Modal.Footer>
+            <Button variant='dark' onClick={this.props.closeModal}>Close</Button>
             <Button variant="primary" type="submit" onClick={this.props.handleModalClose}>
               Submit
             </Button>
-            <Button onClick={this.props.handleModalClose}>Close</Button>
           </Modal.Footer>
         </Form>
       </Modal>
